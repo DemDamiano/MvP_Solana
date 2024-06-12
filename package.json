@@ -1,0 +1,29 @@
+{
+  "name": "mvp_solana",
+  "version": "1.0.0",
+  "description": "Regole: 1. commitare sempre i cambiamenti 2. committare su main solo dopo aver fatto degli integration test e mergiato gli eventuali branch 3. commenti nel codice necessari quindi le sezioni salienti DEVONO essere commentate a dovere",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DemDamiano/MvP_Solana.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DemDamiano/MvP_Solana/issues"
+  },
+  "homepage": "https://github.com/DemDamiano/MvP_Solana#readme",
+  "dependencies": {
+    "@solana/spl-token": "^0.4.6",
+    "@solana/web3.js": "^1.92.3",
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.14.2",
+    "express": "^4.19.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5"
+  }
+}
