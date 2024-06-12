@@ -18,7 +18,7 @@ export async function sendDataToSolana(sensorId: string, value: number): Promise
   const transaction = new Transaction().add(
     SystemProgram.transfer({
       fromPubkey: payer.publicKey,
-      toPubkey: new PublicKey('target_public_key_here'), // Inserisci l'indirizzo pubblico del destinatario
+      toPubkey: new PublicKey('8CPEoHHzM9fGyi8ivZdR12UxQB3UqFebiigFUfVLd32c'), // Inserisci l'indirizzo pubblico del destinatario
       lamports: 1000, // Ammontare da trasferire in lamports (1 lamport = 10^-9 SOL)
     })
   );
