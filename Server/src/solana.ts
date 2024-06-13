@@ -1,12 +1,11 @@
 import { Connection, PublicKey, clusterApiUrl, Keypair, Transaction, SystemProgram } from '@solana/web3.js';
 import fs from 'fs';
+import { WALLET_PATH, CLUSTER_URL } from '../global';
 
-const SOLANA_NETWORK = clusterApiUrl('devnet'); // Usa 'mainnet-beta' per la mainnet
-const connection = new Connection(SOLANA_NETWORK, 'confirmed');
+const connection = new Connection(CLUSTER_URL, 'confirmed');
 
 // Load the secret key from a JSON file (adjust the path as needed)
-const secretKeyPath = 'wallet.json';
-const secretKeyString = fs.readFileSync(secretKeyPath, 'utf8');
+const secretKeyString = fs.readFileSync(WALLET_PATH, 'utf8');
 const publicKeyString = '8CPEoHHzM9fGyi8ivZdR12UxQB3UqFebiigFUfVLd32c';
 const recipientPublicKey = new PublicKey(publicKeyString);
 
