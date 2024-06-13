@@ -1,5 +1,5 @@
-import { Router } from "express";
-import { postSensorData } from "../controllers/sensor-controller";
+import { Router } from 'express';
+import { postSensorData } from '../controllers/sensor-controller';
 
 const sensorRouter = Router();
 

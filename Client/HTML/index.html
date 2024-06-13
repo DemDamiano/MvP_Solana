@@ -1,0 +1,27 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solana Data Viewer</title>
+</head>
+<body>
+    <h1>Saldo Account Solana</h1>
+    <div id="balance">Caricamento...</div>
+
+    <script>
+        async function fetchBalance() {
+            try {
+                const response = await fetch('/data');
+                const data = await response.json();
+                document.getElementById('balance').innerText = `Saldo: ${data.balance} lamports`;
+            } catch (error) {
+                console.error('Errore nel recupero dei dati:', error);
+                document.getElementById('balance').innerText = 'Errore nel recupero dei dati';
+            }
+        }
+
+        // Chiamata alla funzione per recuperare il saldo quando la pagina viene caricata
+        window.onload = fetchBalance;
+    </script>
+</body>
+</html>
