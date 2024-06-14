@@ -2,8 +2,10 @@
   "name": "mvp_solana",
   "version": "1.0.0",
   "description": "Regole: 1. commitare sempre i cambiamenti 2. committare su main solo dopo aver fatto degli integration test e mergiato gli eventuali branch 3. commenti nel codice necessari quindi le sezioni salienti DEVONO essere commentate a dovere",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
+    "start": "node index.ts",
+    "client": "npm start --prefix client",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -25,6 +27,10 @@
     "axios": "^1.7.2",
     "express": "^4.19.2",
     "ts-node": "^10.9.2",
-    "typescript": "^5.4.5"
+    "typescript": "^5.4.5",
+    "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "concurrently": "^6.0.0"
   }
 }
