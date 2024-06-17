@@ -1,31 +1,24 @@
-const express = require('express');
-const axios = require('axios');
-const solanaWeb3 = require('@solana/web3.js');
 
-const app = express();
-const PORT = process.env.PORT || 3000;
+document.addEventListener("DOMContentLoaded", function() {
+    let currentIndex = 0;
+    const items = document.querySelectorAll('.carousel-item');
 
-// Configura la connessione a un nodo Solana
-const connection = new solanaWeb3.Connection(solanaWeb3.clusterApiUrl('devnet'), 'confirmed');
-
-// Endpoint per ottenere i dati dalla blockchain Solana
-app.get('/data', async (req, res) => {
-    try {
-        // Esempio: Recupera il saldo di un account Solana
-        const publicKey = new solanaWeb3.PublicKey('8CPEoHHzM9fGyi8ivZdR12UxQB3UqFebiigFUfVLd32c'); // Sostituisci con una chiave pubblica reale
-        const balance = await connection.getBalance(publicKey);
-
-        // Invia i dati come JSON
-        res.json({ balance });
-    } catch (error) {
-        console.error('Errore nel recupero dei dati dalla blockchain:', error);
-        res.status(500).json({ error: 'Errore interno del server' });
+    function showNextItem() {
+        items[currentIndex].classList.remove('active');
+        currentIndex = (currentIndex + 1) % items.length;
+        items[currentIndex].classList.add('active');
     }
-});
 
-// Servi l'interfaccia HTML
-app.use(express.static('public'));
+    setInterval(showNextItem, 3000); // Cambia immagine ogni 3 secondi
 
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+    const togglePassword = document.getElementById('toggle-password');
+    const passwordInput = document.getElementById('password');
+
+    togglePassword.addEventListener('click', function() {
+        const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+        passwordInput.setAttribute('type', type);
+
+        // Cambia l'icona a seconda dello stato
+        this.textContent = type === 'password' ? '../IMG/Login/Icon/hidePssw.png' : '../IMG/Login/Icon/showPssw.png';// Sostituisci con altre icone se preferisci
+    });
 });

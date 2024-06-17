@@ -1,27 +1,55 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Solana Data Viewer</title>
+    <title>Odin Login</title>
+    <link rel="stylesheet" href="../STYLE/style.css">
 </head>
 <body>
-    <h1>Saldo Account Solana</h1>
-    <div id="balance">Caricamento...</div>
-
+    <div class="login-container">
+        <div class="login-form">
+            <h1>Odin</h1>
+            <p>Wisdom in Motion</p>
+            <form>
+                <div class="input-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username">
+                </div>
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password">
+                    <button type="button" id="toggle-password">
+                        <img src="../IMG/Login/Icon/showPssw.png" alt="Show/Hide Password">
+                    </button>
+                </div>
+                <div class="input-group input-group-remember">
+                    <input type="checkbox" id="remember" name="remember">
+                    <label for="remember">Remember Me</label>
+                </div>
+                <button type="submit">Log in</button>
+            </form>
+        </div>
+        <div class="carousel active">
+            <div class="carousel-item active">
+                <img src="../IMG/Login/Carousel/1.png" alt="Car 1">
+                <div class="carousel-caption">
+                    <h2>Connected. Informed. Secure.</h2>
+                    <p>Welcome to Odin</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="../IMG/Login/Carousel/3.png" alt="Car 2">
+                <div class="carousel-caption">
+                    <h2>Connected. Informed. Secure.</h2>
+                    <p>Welcome to Odin</p>
+                </div>
+            </div>
+            <!-- Add more carousel items as needed -->
+        </div>
+    </div>
     <script>
-        async function fetchBalance() {
-            try {
-                const response = await fetch('/data');
-                const data = await response.json();
-                document.getElementById('balance').innerText = `Saldo: ${data.balance} lamports`;
-            } catch (error) {
-                console.error('Errore nel recupero dei dati:', error);
-                document.getElementById('balance').innerText = 'Errore nel recupero dei dati';
-            }
-        }
-
-        // Chiamata alla funzione per recuperare il saldo quando la pagina viene caricata
-        window.onload = fetchBalance;
+        
     </script>
 </body>
 </html>
