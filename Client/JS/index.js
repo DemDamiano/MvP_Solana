@@ -1,4 +1,3 @@
-
 document.addEventListener("DOMContentLoaded", function() {
     let currentIndex = 0;
     const items = document.querySelectorAll('.carousel-item');
@@ -19,6 +18,7 @@ document.addEventListener("DOMContentLoaded", function() {
         passwordInput.setAttribute('type', type);
 
         // Cambia l'icona a seconda dello stato
-        this.textContent = type === 'password' ? '../IMG/Login/Icon/hidePssw.png' : '../IMG/Login/Icon/showPssw.png';// Sostituisci con altre icone se preferisci
+        const icon = type === 'password' ? '../IMG/Login/Icon/showPssw.png' : '../IMG/Login/Icon/hidePssw.png';
+        this.querySelector('img').setAttribute('src', icon);
     });
 });

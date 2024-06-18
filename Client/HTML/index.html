@@ -9,18 +9,24 @@
 <body>
     <div class="login-container">
         <div class="login-form">
-            <h1>Odin</h1>
-            <p>Wisdom in Motion</p>
+            <div class="logo-title-container">
+                 <div class="title-container">
+                    <h1>Odin</h1>
+                    <p>Wisdom in Motion</p>
+                </div>
+                <div class="logo-container">
+                    <img src="../IMG/Login/Logo/odin_logo.png"  alt="Odin Logo" class="odin-logo">
+                </div>
+              
+            </div>
             <form>
                 <div class="input-group">
-                    <label for="username">Username</label>
-                    <input type="text" id="username" name="username">
+                    <input type="text" id="username" name="username" placeholder="Username">
                 </div>
-                <div class="input-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" name="password">
+                <div class="input-group password-container">
+                    <input type="password" id="password" name="password" placeholder="Password">
                     <button type="button" id="toggle-password">
-                        <img src="../IMG/Login/Icon/showPssw.png" alt="Show/Hide Password">
+                        <img src="../IMG/Login/Icon/hidePssw.png" alt="Show/Hide Password">
                     </button>
                 </div>
                 <div class="input-group input-group-remember">
@@ -48,8 +54,6 @@
             <!-- Add more carousel items as needed -->
         </div>
     </div>
-    <script>
-        
-    </script>
+    <script src="../JS/index.js"></script>
 </body>
 </html>
