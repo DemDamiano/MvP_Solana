@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function() {
         passwordInput.setAttribute('type', type);
 
         // Cambia l'icona a seconda dello stato
-        const icon = type === 'password' ? '../IMG/Login/Icon/showPssw.png' : '../IMG/Login/Icon/hidePssw.png';
+        const icon = type === 'password' ? '../../IMG/Login/Icon/showPssw.png' : '../../IMG/Login/Icon/hidePssw.png';
         this.querySelector('img').setAttribute('src', icon);
     });
 });

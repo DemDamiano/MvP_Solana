@@ -7,7 +7,7 @@ body {
     justify-content: center;
     align-items: center;
     overflow: hidden;
-    background-color: #f4f4f9;
+    background-color: #f5f8ff;
 }
 
 .login-container {
@@ -17,13 +17,15 @@ body {
 }
 
 .login-form {
-    background-color: #fff;
+    background-color: #f5f8ff; /* Azzurro chiaro */
     padding: 40px;
     width: 30%;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    border-radius: 15px; /* Bordi arrotondati */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .logo-title-container {
@@ -39,8 +41,9 @@ body {
 }
 
 .odin-logo {
-    width: 500px; /* Adjust the size as needed */
+    width: 40px; /* Adjust the size as needed */
     height: auto;
+    margin-right: 10px;
 }
 
 .title-container {
@@ -60,6 +63,13 @@ body {
     margin: 0;
 }
 
+.input-wrapper {
+    background-color: #fff; /* Sfondo bianco per il contenitore dei campi di input */
+    border-radius: 10px; /* Bordi arrotondati */
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
 
 .input-group {
     margin-bottom: 20px;
@@ -164,9 +174,4 @@ button:hover {
 .password-container button img {
     width: 20px;
     height: 20px;
-}
-.odin-logo {
-    width: 40px; /* Adjust the size as needed */
-    height: auto;
-    margin-right: 10px;
 }

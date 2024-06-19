@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Odin - Car Reservation</title>
+    <link rel="stylesheet" href="../STYLE/style.css">
+</head>
+<body>
+    <div class="sidebar">
+        <div class="user-section">
+            <div class="user-icon"></div>
+            <p>Hello User</p>
+        </div>
+        <div class="notification-icon"></div>
+        <nav>
+            <ul>
+                <li class="active"><a href="#"><div class="home-icon"></div></a></li>
+                <li><a href="#"><div class="clock-icon"></div></a></li>
+                <li><a href="#"><div class="briefcase-icon"></div></a></li>
+                <li><a href="#"><div class="people-icon"></div></a></li>
+            </ul>
+        </nav>
+        <div class="logout-icon"></div>
+    </div>
+    <div class="main-content">
+        <header>
+            <h1>Odin</h1>
+            <p>Wisdom in Motion</p>
+            <div class="search-icon"></div>
+        </header>
+        <div class="reservation-forms">
+            <form class="reservation-form" id="trip-form">
+                <h2>Reserve a car for a trip</h2>
+                <table class="table-container">
+                    <tr class="table-row">
+                        <td class="table-cell">
+                            <div class="input-container">
+                                <label for="from-trip" class="label">From</label>
+                                <input type="text" id="from-trip" name="from" class="rounded-input" placeholder="Enter location">
+                            </div>
+                        </td>
+                        <td class="table-cell">
+                            <div class="input-container">
+                                <label for="to-trip" class="label">To</label>
+                                <input type="text" id="to-trip" name="to" class="rounded-input" placeholder="Enter destination">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="table-row">
+                        <td class="table-cell">
+                            <div class="input-container">
+                                <label for="day-trip" class="label">Day</label>
+                                <input type="date" id="day-trip" name="day" class="rounded-input">
+                            </div>
+                        </td>
+                        <td class="table-cell">
+                            <div class="input-container">
+                                <label for="time-trip" class="label">Time</label>
+                                <input type="time" id="time-trip" name="time" class="rounded-input">
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                <div class="input-container input-group input-group-stroke">
+                    <label for="return-trip" class="return-label">Return stroke?</label>
+                    <input type="checkbox" id="return-trip" name="return"> 
+                </div>
+                <button type="submit">Search</button>
+            </form>
+            <form class="reservation-form" id="day-form">
+                <h2>Reserve a car for a day or some</h2>
+                <table class="table-container">
+                    <tr class="table-row">
+                        <td class="table-cell">
+                            <div class="input-container">
+                                <label for="from-trip" class="label">From</label>
+                                <input type="text" id="from-trip" name="from" class="rounded-input" placeholder="Enter location">
+                            </div>
+                        </td>
+                        <td class="table-cell">
+                            <div class="input-container">
+                                <label for="to-trip" class="label">To</label>
+                                <input type="text" id="to-trip" name="to" class="rounded-input" placeholder="Enter destination">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="table-row">
+                        <td class="table-cell">
+                            <div class="input-container">
+                                <label for="day-trip" class="label">Day</label>
+                                <input type="date" id="day-trip" name="day" class="rounded-input">
+                            </div>
+                        </td>
+                        <td class="table-cell">
+                            <div class="input-container">
+                                <label for="time-trip" class="label">Time</label>
+                                <input type="time" id="time-trip" name="time" class="rounded-input">
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                <div class="input-container input-group input-group-stroke">
+                    <label for="return-trip" class="return-label">Return stroke?</label>
+                    <input type="checkbox" id="return-trip" name="return"> 
+                </div>
+                <button type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+    <script src="../JS/index.js"></script>
+</body>
+</html>
