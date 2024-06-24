@@ -1,226 +1,283 @@
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    display: flex;
-    background-color: #F2F3F5;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  display: flex;
+  background-color: #F2F3F5;
 }
 
 .sidebar {
-    width: 80px;
-    background-color: #FFFFFF;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 20px;
-    height: 100vh;
-    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+  width: 80px;
+  background-color: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+  height: 100vh;
+  box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+  justify-content: space-between;
 }
 
-.user-section {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    margin-bottom: 20px;
+.user-section, nav, .logout-section {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logout-section {
+  margin-top: auto;
+  padding-bottom: 20px;
+  text-align: center;
 }
 
 .user-icon, .notification-icon, .home-icon, .clock-icon, .briefcase-icon, .people-icon, .logout-icon {
-    width: 20px;
-    height: 20px;
-    background-color: #ccc;
-    border-radius: 50%;
-    margin-bottom: 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-bottom: 20px;
+  border: 0;
 }
 
 .notification-icon {
-    background-color: #f00;
+  background-color: #f00;
 }
 
 nav ul {
-    list-style: none;
-    padding: 0;
-    width: 100%;
-    text-align: center;
+  list-style: none;
+  padding: 0;
+  width: 100%;
+  text-align: center;
 }
 
 nav ul li {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 nav ul li.active div {
-    background-color: #6200EE;
+  background-color: #6200EE;
 }
 
 nav ul li a {
-    text-decoration: none;
-    color: inherit;
+  text-decoration: none;
+  color: inherit;
 }
 
 .main-content {
-    flex: 1;
-    padding: 40px;
+  flex: 1;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
 }
 
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 40px;
+.main-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background-color: #fff;
+  border-bottom: 1px solid #ddd;
 }
 
-header h1 {
-    font-size: 2em;
-    margin: 0;
-    color: #0D47A1;
+.header-left, .header-right {
+  display: flex;
+  align-items: center;
 }
 
-header p {
-    margin: 0;
-    color: #777;
+.header-left {
+  margin-right: auto;
 }
 
-.search-icon {
-    width: 30px;
-    height: 30px;
-    background-color: #ccc;
-    border-radius: 50%;
+.header-right {
+  margin-left: auto;
+}
+
+.header-icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 10px;
+}
+
+.user-info, .notification, .logo, .search-bar {
+  display: flex;
+  align-items: center;
+}
+
+.notification {
+  position: relative;
+}
+
+.notification-count {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 12px;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+}
+
+.search-bar input {
+  border: 1px solid #ddd;
+  padding: 5px 10px;
+  border-radius: 4px;
+  margin-right: 10px;
+}
+
+.search-bar img {
+  cursor: pointer;
 }
 
 .reservation-forms {
-    display: flex;
-    justify-content: space-between;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
 }
 
 .reservation-form {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    width: 45%;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  width: 45%;
 }
 
 .reservation-form h2 {
-    margin-top: 0;
-    color: #0D47A1;
+  margin-top: 0;
+  color: #0D47A1;
 }
 
 .reservation-form label {
-    display: block;
-    margin-bottom: 5px;
-    color: #777;
+  display: block;
+  margin-bottom: 5px;
+  color: #777;
 }
 
 .reservation-form input, .reservation-form button {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }
 
 .reservation-form button {
-    background-color: #6200EE;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s;
+  background-color: #6200EE;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
 .reservation-form button:hover {
-    background-color: #3700B3;
+  background-color: #3700B3;
 }
 
 .return-label {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
 }
 
-.return-label input {
-    margin-right: 0px;
+.return-label input[type="checkbox"] {
+  margin-right: 5px;
 }
 
 .form-container {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
-  }
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
 
-  .input-container {
-    margin-bottom: 15px;
-    width:70%
-  }
+.input-container {
+  margin-bottom: 15px;
+  width: 70%;
+}
 
-  .rounded-input {
-    width: 50%;
-    padding: 12px 20px;
-    border: 2px solid #ccc;
-    border-radius: 25px;
-    font-size: 16px;
-    outline: none;
-    transition: border-color 0.3s;
-  }
+.rounded-input {
+  width: 50%;
+  padding: 12px 20px;
+  border: 2px solid #ccc;
+  border-radius: 25px;
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.3s;
+}
 
-  .rounded-input:focus {
-    border-color: #007BFF;
-  }
+.rounded-input:focus {
+  border-color: #007BFF;
+}
 
-  .rounded-input::placeholder {
-    color: #aaa;
-  }
+.rounded-input::placeholder {
+  color: #aaa;
+}
 
-  .label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-  }
+.label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
 
-  .rounded {
-    border-radius: 25px;
-  }
+.rounded {
+  border-radius: 25px;
+}
 
-  .border-transition {
-    transition: border-color 0.3s;
-  }
+.border-transition {
+  transition: border-color 0.3s;
+}
 
-  .focus-border-primary:focus {
-    border-color: #007BFF;
-  }
-  .table-container{
-    width:100%;
-  }
-  .table-row{
-    width:100%;
-  }
-  .table-cell{
-    width: 50%;
-  }
+.focus-border-primary:focus {
+  border-color: #007BFF;
+}
+
+.table-container {
+  width: 100%;
+}
+
+.table-row {
+  width: 100%;
+  display: flex;
+}
+
+.table-cell {
+  flex: 1;
+  padding: 10px;
+}
+
 .input-group-stroke {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .input-group {
-    margin-bottom: 20px;
-    position: relative;
+  margin-bottom: 20px;
+  position: relative;
 }
-#return-trip{
-    width:30px
+
+#return-trip {
+  width: 30px;
 }
 
 header {
-    text-align: center;
-    padding: 20px;
-    margin: 10px 0 20px;
-  }
+  text-align: center;
+  padding: 20px;
+  margin: 10px 0 20px;
+}
 
-  header h1 {
-    margin: 0;
-    font-size: 36px;
-  }
+header h1 {
+  margin: 0;
+  font-size: 36px;
+}
 
-  header p {
-    margin: 10px 0 20px;
-    font-size: 18px;
-    color: #555;
-  }
+header p {
+  margin: 10px 0 20px;
+  font-size: 18px;
+  color: #555;
+}

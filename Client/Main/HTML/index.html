@@ -10,24 +10,54 @@
     <div class="sidebar">
         <div class="user-section">
             <div class="user-icon"></div>
-            <p>Hello User</p>
+            <p><!--Hello User--></p>
         </div>
-        <div class="notification-icon"></div>
         <nav>
             <ul>
-                <li class="active"><a href="#"><div class="home-icon"></div></a></li>
-                <li><a href="#"><div class="clock-icon"></div></a></li>
-                <li><a href="#"><div class="briefcase-icon"></div></a></li>
-                <li><a href="#"><div class="people-icon"></div></a></li>
+                <li class="active">
+                    <a href="#">    
+                        <img src="../../IMG/Main/Icon/home.png" alt="Home" class="home-icon">
+                    </a>
+                </li>
+                <li>
+                    <a href="#">    
+                        <img src="../../IMG/Main/Icon/cruscotto.png" alt="Dashboard" class="home-icon">
+                    </a>
+                </li>
+                <li>
+                    <a href="#">    
+                        <img src="../../IMG/Main/Icon/gruppoUomoDonna.png" alt="Group" class="home-icon">
+                    </a>
+                </li>
             </ul>
         </nav>
-        <div class="logout-icon"></div>
+        <div class="logout-section">
+            <a href="#">
+                <img src="../../IMG/Main/Icon/spegnimento.png" alt="Logout" class="home-icon">
+            </a>
+        </div>
     </div>
     <div class="main-content">
-        <header>
-            <h1>Odin</h1>
-            <p>Wisdom in Motion</p>
-            <div class="search-icon"></div>
+        <header class="main-header">
+            <div class="header-left">
+                <div class="user-info">
+                    <img src="../../IMG/Main/Icon/utente.png" alt="User Icon" class="header-icon user-icon">
+                    <span>Hello User</span>
+                </div>
+                <div class="notification">
+                    <img src="../../IMG/Main/Icon/notifica.png" alt="Notification Bell" class="header-icon">
+                    <span class="notification-count">1</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="logo">
+                    <img src="../../IMG/Main/Icon/manual.png" alt="Logo" class="header-icon">
+                </div>
+                <div class="search-bar">
+                    <input type="text" placeholder="Search">
+                    <img src="../../IMG/Main/Icon/search-icon.png" alt="Search" class="header-icon">
+                </div>
+            </div>
         </header>
         <div class="reservation-forms">
             <form class="reservation-form" id="trip-form">
