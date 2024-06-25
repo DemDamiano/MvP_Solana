@@ -90,14 +90,29 @@
   color: #0066cc;
 }
 .drop-off {
-  grid-column: span 2;
-  display: flex;
-  align-items: center;
+  text-align: center; /* Allinea il contenuto al centro */
 }
+
+.drop-off h4 {
+  margin-bottom: 5px; /* Spaziatura inferiore tra il titolo e l'immagine */
+}
+
+.drop-off .icon-wrapper {
+  display: flex; /* Utilizza flexbox per allineare l'immagine e il numero */
+  align-items: center; /* Allinea verticalmente */
+  justify-content: center; /* Allinea orizzontalmente */
+  margin-bottom: 5px; /* Spaziatura inferiore tra l'immagine e il numero */
+}
+
 .drop-off img {
-  width: 30px;
-  height: 30px;
-  margin-right: 10px;
+  width: 80px; /* Dimensioni dell'icona */
+  height: 80px;
+  margin-right: 5px; /* Spaziatura a destra dell'icona */
+}
+
+.drop-off p {
+  font-size: 70px; /* Dimensione del numero */
+  margin: 0; /* Rimuove il margine predefinito */
 }
 .rental-duration {
   margin-top: 20px;
