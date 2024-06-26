@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Odin - Car Reservation</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.css" />
+    <script src="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.js"></script>
+
     <link rel="stylesheet" href="../../Common/STYLE/common.css">
     <link rel="stylesheet" href="../STYLE/style.css">
 </head>
@@ -93,67 +98,69 @@
             </div>
         </div>
         <div class="trip-info">
-                <div class="container">
-                    <table class="trip-stats">
-                        <tr>
-                            <td>
-                                <div>
-                                    <h4>Kilometers travelled</h4>
-                                    <p>17km</p>
-                                </div>
-                            </td>
-                            <td>
-                                <div>
-                                    <h4>Time on board</h4>
-                                    <p>20'</p>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div>
-                                    <h4>Kilometers remaining</h4>
-                                    <p>10km</p>
-                                </div>
-                            </td>
-                            <td>
-                                <h4>Time upon arrival</h4>
-                                <p>13'</p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <h4>Drop off points</h4>
-                            </td>
-                            <td>
-                                <h4>Rental Duration</h4>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>  
-                                <div class="drop-off">  
-                                <div class="icon-wrapper">
-                                    <img src="../../../IMG/Main/TripMonitor/icon-parking.png" alt="Drop off icon">
-                                    <p>7</p>
-                                </div>
+            <div class="container">
+                <table class="trip-stats">
+                    <tr>
+                        <td>
+                            <div>
+                                <h4>Kilometers travelled</h4>
+                                <p>17km</p>
                             </div>
-                            </td>
-                            <td>
-                                <div class="rental-chart">
-                                    <div class="time-spent" style="width: 40%;"></div>
-                                    <div class="active-time" style="width: 60%;"></div>
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-        
-                <div class="map">
-                    <img src="map.png" alt="Map">
-                    <p>You're heading towards <span>Pfäffikon</span></p>
-                    <p>Your current position: <span>Wermatswile</span></p>
-                </div>
+                        </td>
+                        <td>
+                            <div>
+                                <h4>Time on board</h4>
+                                <p>20'</p>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div>
+                                <h4>Kilometers remaining</h4>
+                                <p>10km</p>
+                            </div>
+                        </td>
+                        <td>
+                            <h4>Time upon arrival</h4>
+                            <p>13'</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h4>Drop off points</h4>
+                        </td>
+                        <td>
+                            <h4>Rental Duration</h4>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>  
+                            <div class="drop-off">  
+                            <div class="icon-wrapper">
+                                <img src="../../../IMG/Main/TripMonitor/icon-parking.png" alt="Drop off icon">
+                                <p>7</p>
+                            </div>
+                        </div>
+                        </td>
+                        <td>
+                            <div class="rental-chart">
+                                <div class="time-spent" style="width: 40%;"></div>
+                                <div class="active-time" style="width: 60%;"></div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+    
+            <div class="map">
+                <div id="map" style="height: 250px; width: 100%;"></div>
+                <p>You're heading towards <span>Pfäffikon</span></p>
+                <p>Your current position: <span>Wermatswile</span></p>
+                <button onclick="showRoute()">Mostra Percorso</button>
+            </div>
         </div>
     </div>
+    <script src="../JS/script.js"></script>
 </body>
 </html>
