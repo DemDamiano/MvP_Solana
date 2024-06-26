@@ -68,29 +68,26 @@
   max-width: 40%;
   text-align: center;
 }
-
-.trip-stats {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-gap: 20px;
-}
-.trip-stats div {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+.trip-stats{
+  width: 80%;
 }
 .trip-stats h4 {
-  margin: 0;
   font-size: 1em;
   color: #6c6c6c;
 }
 .trip-stats p {
-  margin: 5px 0 0;
   font-size: 1.5em;
   color: #0066cc;
 }
+.drop-rental {
+  display: flex;
+  justify-content: space-between; /* Optional: adjust as needed */
+  align-items: flex-start; /* Align items at the start */
+}
+
+
 .drop-off {
-  text-align: center; /* Allinea il contenuto al centro */
+  text-align: justify; /* Allinea il contenuto al centro */
 }
 
 .drop-off h4 {
@@ -100,7 +97,7 @@
 .drop-off .icon-wrapper {
   display: flex; /* Utilizza flexbox per allineare l'immagine e il numero */
   align-items: center; /* Allinea verticalmente */
-  justify-content: center; /* Allinea orizzontalmente */
+  justify-content: justify; /* Allinea orizzontalmente */
   margin-bottom: 5px; /* Spaziatura inferiore tra l'immagine e il numero */
 }
 
@@ -115,13 +112,10 @@
   margin: 0; /* Rimuove il margine predefinito */
 }
 .rental-duration {
-  margin-top: 20px;
+  margin-top: 0px;
 }
 .rental-duration h4 {
-  margin: 0 0 10px 0;
-  font-size: 1em;
-  color: #6c6c6c;
-  text-align: center;
+  height:50px
 }
 .rental-chart {
   display: flex;
@@ -140,7 +134,6 @@
 .chart-label {
   display: flex;
   justify-content: space-between;
-  margin-top: 10px;
 }
 .chart-label span {
   font-size: 0.8em;
