@@ -4,13 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Odin - Car Reservation</title>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
-    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.css" />
-    <script src="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.js"></script>
-    <script src="https://unpkg.com/leaflet-control-geocoder@1.13.0/dist/Control.Geocoder.js"></script>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder@1.13.0/dist/Control.Geocoder.css" />
-    <script src="https://unpkg.com/@geoapify/geocoder-autocomplete@1.0.2/dist/bundle.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <!--
+    <script async src="https://maps.googleapis.com/maps/api/js?key=&callback=console.debug&libraries=maps,marker&v=beta">
+    -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCKYIUUKpUGlRbuu1BFgBBv05eSvyqiUsY&libraries=places"></script>
 
     <link rel="stylesheet" href="../../Common/STYLE/common.css">
     <link rel="stylesheet" href="../STYLE/style.css">
@@ -29,7 +27,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">    
+                    <a href="../../TripMonitor/HTML/index.html">    
                         <img src="../../../IMG/Main/Home/icon-dashboard.png" alt="Dashboard" class="home-icon">
                     </a>
                 </li>
@@ -81,9 +79,7 @@
                         <td class="table-cell">
                             <div class="input-container">
                                 <label for="from-trip" class="label">From</label>
-                                <input onchange="addGeocoder()" type="text" id="from-trip" name="from" class="rounded-input " placeholder=" test Enter location">
-                                
-                                 <div id="start-autocomplete-list" class="autocomplete-items"></div>
+                                <input type="text" id="from-trip" name="from" class="rounded-input " placeholder="Enter location">
                             </div>
                         </td>
                         <td class="table-cell">
@@ -112,7 +108,7 @@
                     <label for="return-trip" class="return-label">Return stroke?</label>
                     <input type="checkbox" id="return-trip" name="return"> 
                 </div>
-                <button type="submit" >Search</button>
+                <button type="submit" id="search-trip" >Search</button>
             </form>
             <form class="reservation-form" id="day-form">
                 <h2>Reserve a car for a day or some</h2>
@@ -120,14 +116,15 @@
                     <tr class="table-row">
                         <td class="table-cell">
                             <div class="input-container">
+                                
                                 <label for="from-trip" class="label">From</label>
-                                <input type="text" id="from-trip" name="from" class="rounded-input" placeholder="Enter location">
+                                <input type="text" id="from-trip-day" name="from" class="rounded-input" placeholder="Enter location">
                             </div>
                         </td>
                         <td class="table-cell">
                             <div class="input-container">
                                 <label for="to-trip" class="label">To</label>
-                                <input type="text" id="to-trip" name="to" class="rounded-input" placeholder="Enter destination">
+                                <input type="text" id="to-trip-day" name="to" class="rounded-input" placeholder="Enter destination">
                             </div>
                         </td>
                     </tr>
@@ -147,8 +144,8 @@
                     </tr>
                 </table>
                 <div class="input-container input-group input-group-stroke">
-                    <label for="return-trip" class="return-label">Return stroke?</label>
-                    <input type="checkbox" id="return-trip" name="return"> 
+                    <label for="return-trip" class="return-label"> </label>
+                    <input type="checkbox" id="return-trip" name="return" style="display:none;">
                 </div>
                 <button type="submit">Search</button>
             </form>
