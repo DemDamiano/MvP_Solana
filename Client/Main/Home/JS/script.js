@@ -1,6 +1,6 @@
-let latitude = "undefined";
-let longitude= "undefined";
-let placeName= "undefined";
+let latitude = undefined;
+let longitude = undefined;
+let placeName = undefined;
 
 function initAutocomplete() {
     let fromTrip = document.getElementById('from-trip');
@@ -14,55 +14,60 @@ function initAutocomplete() {
 
     // Aggiungi un listener per l'evento di selezione di un posto
     autocomplete_fromTrip.addListener('place_changed', function() {
-        getPlaceDetails(autocomplete_fromTrip.getPlace(),"from-trip");
+        getPlaceDetails(autocomplete_fromTrip.getPlace(), "from-trip");
     });
     autocomplete_toTrip.addListener('place_changed', function() {
-        getPlaceDetails(autocomplete_toTrip.getPlace(),"to-trip");
+        getPlaceDetails(autocomplete_toTrip.getPlace(), "to-trip");
     });
     autocomplete_fromTripDay.addListener('place_changed', function() {
-        getPlaceDetails(autocomplete_fromTripDay.getPlace(),"from-trip-day");
+        getPlaceDetails(autocomplete_fromTripDay.getPlace(), "from-trip-day");
     });
     autocomplete_toTripDay.addListener('place_changed', function() {
-        getPlaceDetails(autocomplete_toTripDay.getPlace(),"to-trip-day");
+        getPlaceDetails(autocomplete_toTripDay.getPlace(), "to-trip-day");
     });
 }
 
 // Funzione per ottenere i dettagli del posto selezionato
-function getPlaceDetails(place,action) {
+function getPlaceDetails(place, action) {
     if (!place.geometry) {
         console.error("Errore: Dettagli del posto non disponibili per ", place);
         return;
     }
 
-    let latitude = place.geometry.location.lat();
-    let longitude = place.geometry.location.lng();
-    let placeName = place.name; // Nome completo del posto
+    latitude = place.geometry.location.lat();
+    longitude = place.geometry.location.lng();
+    placeName = place.name; // Nome completo del posto
 
-
-    console.log("\nAction: ",action ,"\nplace name: ",placeName , "\nCoordinate: " + latitude + ", " + longitude);
-    
+    console.log("\nAction: ", action, "\nplace name: ", placeName, "\nCoordinate: " + latitude + ", " + longitude);
 }
 
-let button = document.getElementById('search-trip');
-
-button.addEventListener('click', function() {
+document.getElementById('search-trip').addEventListener('click', function() {
     // Controlla se i parametri sono stati definiti
     if (latitude === undefined || longitude === undefined || placeName === undefined) {
-        console.error("Errore: Assicurati di aver selezionato tutti i luoghi necessari.");
-        return;
+        console.log("Errore: Assicurati di aver selezionato tutti i luoghi necessari.");
+        //return;
     }
-
-    // Codifica dei parametri per l'URL
-    let encodedPlaceName = encodeURIComponent(placeName);
-    let encodedLatitude = encodeURIComponent(latitude);
-    let encodedLongitude = encodeURIComponent(longitude);
-
-    // Costruisci l'URL con i parametri
-    let url = `../../Home/HTML/index.html?from=${encodedPlaceName}&lat=${encodedLatitude}&lng=${encodedLongitude}`;
-
-    // Redirigi verso la nuova pagina con i parametri
-    window.location.href = url;
+    openPopupPage();
 });
+
+function openPopupPage() {
+    const popupContainer = document.getElementById('popup-container');
+    console.log("open pop-up page")
+    fetch('../../TripMonitor/HTML/index.html')
+        .then(response => response.text())
+        .then(data => {
+            popupContainer.innerHTML = `<div id="popup-content">${data}<button id="close-popup">Chiudi</button></div>`;
+            popupContainer.classList.remove('hidden');
+            popupContainer.classList.add('visible');
+
+            const closePopupButton = document.getElementById('close-popup');
+            closePopupButton.addEventListener('click', () => {
+                popupContainer.classList.remove('visible');
+                popupContainer.classList.add('hidden');
+            });
+        })
+        .catch(error => console.log('Error loading popup:', error));
+}
 
 document.addEventListener('DOMContentLoaded', function() {
     initAutocomplete();
