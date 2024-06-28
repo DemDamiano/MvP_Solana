@@ -61,7 +61,7 @@ nav ul li a {
 
 .main-content {
   flex: 1;
-  padding: 40px;
+  padding: 0px;
   display: flex;
   flex-direction: column;
   box-sizing: border-box;

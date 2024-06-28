@@ -41,7 +41,8 @@ function getPlaceDetails(place, action) {
     console.log("\nAction: ", action, "\nplace name: ", placeName, "\nCoordinate: " + latitude + ", " + longitude);
 }
 
-document.getElementById('search-trip').addEventListener('click', function() {
+document.getElementById('search-trip').addEventListener('click', function(event) {
+    event.preventDefault();
     // Controlla se i parametri sono stati definiti
     if (latitude === undefined || longitude === undefined || placeName === undefined) {
         console.log("Errore: Assicurati di aver selezionato tutti i luoghi necessari.");
@@ -52,21 +53,37 @@ document.getElementById('search-trip').addEventListener('click', function() {
 
 function openPopupPage() {
     const popupContainer = document.getElementById('popup-container');
-    console.log("open pop-up page")
-    fetch('../../TripMonitor/HTML/index.html')
-        .then(response => response.text())
-        .then(data => {
-            popupContainer.innerHTML = `<div id="popup-content">${data}<button id="close-popup">Chiudi</button></div>`;
-            popupContainer.classList.remove('hidden');
-            popupContainer.classList.add('visible');
+    console.log("Trying to open popup");
 
-            const closePopupButton = document.getElementById('close-popup');
-            closePopupButton.addEventListener('click', () => {
-                popupContainer.classList.remove('visible');
-                popupContainer.classList.add('hidden');
-            });
-        })
-        .catch(error => console.log('Error loading popup:', error));
+    // Create an iframe element
+    const iframe = document.createElement('iframe');
+    iframe.src = '../../TripMonitor/HTML/index.html'; // URL della pagina HTML da caricare
+    iframe.style.border = 'none'; // Rimuove il bordo dell'iframe per renderlo più pulito
+
+    // Imposta l'iframe per adattarsi automaticamente all'altezza del contenuto
+    iframe.style.width = '100%'; // Larghezza al 100% del container
+    iframe.style.height = '100vh'; // Altezza al 100% del container
+
+    // Aggiungi l'iframe al container del popup
+    popupContainer.innerHTML = ''; // Pulisce il contenuto precedente
+    popupContainer.appendChild(iframe);
+
+    // Mostra il popup
+    popupContainer.classList.remove('hidden');
+    popupContainer.classList.add('visible');
+
+    window.addEventListener('message', function(event) {
+        if (event.data === 'closePopup') {
+            popupContainer.classList.remove('visible');
+            popupContainer.classList.add('hidden');
+            popupContainer.innerHTML = '';
+        }
+    });
+
+  
+
+    // Aggiungi un gestore per l'evento load dell'iframe
+    //iframe.onload = adjustIframeHeight;
 }
 
 document.addEventListener('DOMContentLoaded', function() {
