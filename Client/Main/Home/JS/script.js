@@ -89,3 +89,11 @@ function openPopupPage() {
 document.addEventListener('DOMContentLoaded', function() {
     initAutocomplete();
 });
+function openTripMonitor1() {
+    console.log("open TripMonitor");
+    const iframe = document.getElementById('main-content');
+    if (iframe) {
+        iframe.src = '../../TripMonitor/HTML/index.html';
+        setupClosePopupListener();
+    }
+}

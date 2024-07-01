@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Odin - Car Reservation Content</title>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCKYIUUKpUGlRbuu1BFgBBv05eSvyqiUsY&libraries=places"></script>
     <link rel="stylesheet" href="../../Common/STYLE/common.css">
     <link rel="stylesheet" href="../STYLE/style.css">
 </head>
@@ -23,7 +24,7 @@
                         <td class="table-cell">
                             <div class="input-container">
                                 <label for="to-trip" class="label">To</label>
-                                <input onchange="init()" type="text" id="to-trip" name="to" class="rounded-input" placeholder="Enter destination">
+                                <input type="text" id="to-trip" name="to" class="rounded-input" placeholder="Enter destination">
                             </div>
                         </td>
                     </tr>
@@ -46,7 +47,8 @@
                     <label for="return-trip" class="return-label">Return stroke?</label>
                     <input type="checkbox" id="return-trip" name="return"> 
                 </div>
-                <input type="button" class="button-search" id="search-trip" onclick="openPopupPage()" value="Search">
+             
+                <input type="button" class="button-search" id="search-trip" onclick="parent.openTripMonitor()" value="Search">
             </div>
             <div class="reservation-form" id="day-form">
                 <h2>Reserve a car for a day or some</h2>
@@ -88,6 +90,7 @@
             </div>
         </div>
     </div>
+    <script src="../../Common/JS/script.js"></script>
     <script src="../JS/script.js"></script>
 </body>
 </html>
