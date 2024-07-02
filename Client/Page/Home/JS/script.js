@@ -50,7 +50,7 @@ function addPlaceDetails(action, latitude, longitude, placeName) {
         longitude: longitude,
         placeName: placeName
     });
-    console.log("home placeDetails ",placeDetails)
+
 }
 
 function mapValueDefine(){
@@ -67,6 +67,10 @@ function mapValueDefine(){
 
 }
 
+function saveDataLocalStorage() {
+    localStorage.setItem('placeDetails', JSON.stringify(placeDetails));
+    console.log('placeDetails salvato in localStorage');
+}
 document.addEventListener('DOMContentLoaded', function() {
     initAutocomplete();
 });

@@ -1,4 +1,3 @@
-
 body {
   display: flex;
   justify-content: center;
@@ -8,6 +7,7 @@ body {
   font-family: Arial, sans-serif; /* Adjust font-family as needed */
   background-color: #F2F3F5; /* Optional: Set a background color for better visibility */
 }
+
 .reservation-forms {
   padding: 0px;
   display: flex;					

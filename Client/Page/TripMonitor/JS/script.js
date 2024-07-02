@@ -20,7 +20,7 @@ function defineDataRoute(){
     let endLng = "null";
     console.log("placeDetails ",placeDetails)
     for(let i = 0;i<placeDetails.length;i++){
-        if(trip == 'day' ){
+        if(placeDetails[i].action == 'from-trip-day' ||  placeDetails[i].action == 'to-trip-day' ){
             switch(placeDetails[i].action){
                 case 'from-trip-day':
                     startLat = placeDetails[i].latitude
@@ -32,7 +32,7 @@ function defineDataRoute(){
                 break;
                 
             }
-        }else if(trip == 'normal'){
+        }else if(placeDetails[i].action == 'from-trip' || placeDetails[i].action == "to-trip"){
             switch(placeDetails[i].action){
                 case 'from-trip':
                     startLat = placeDetails[i].latitude
@@ -72,7 +72,31 @@ function closePopup(){
 
 }
 
+function retrievePlaceDetails() {
+    let storedPlaceDetails = localStorage.getItem('placeDetails');
+    if (storedPlaceDetails) {
+        placeDetails = JSON.parse(storedPlaceDetails);
+        console.log('placeDetails recuperato da localStorage', placeDetails);                
+        updateSpanValues();
+    } else {
+        console.error("Nessun placeDetails trovato in localStorage");
+    }
+}
+
+function updateSpanValues() {
+    let startPlace = placeDetails.find(detail => detail.action.includes('from'));
+    let endPlace = placeDetails.find(detail => detail.action.includes('to'));
+
+    if (startPlace) {
+        document.getElementById('current-position').innerText = startPlace.placeName;
+    }
+    if (endPlace) {
+        document.getElementById('destination').innerText = endPlace.placeName;
+    }
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     console.log("onload tripMonitorOK")
+    retrievePlaceDetails()
     initMap();
 });
