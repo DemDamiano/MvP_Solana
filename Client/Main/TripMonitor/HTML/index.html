@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Odin - Car Reservation</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.css" />
+    <script src="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.js"></script>
+
+    <link rel="stylesheet" href="../../Common/STYLE/common.css">
+    <link rel="stylesheet" href="../STYLE/style.css">
+</head>
+<body>
+    <div class="sidebar">
+        <div class="user-section">
+            <div class="user-icon"></div>
+            <p><!--Hello User--></p>
+        </div>
+        <nav>
+            <ul>
+                <li class="active">
+                    <!--a href="../../Home/HTML/index.html"-->    
+                    <a href="#">    
+                        <img onclick = "closePopup()" src="../../../IMG/Main/Home/icon-home.png" alt="Home" class="home-icon">
+                    </a>
+                </li>
+                <li>
+                    <a href="#">    
+                        <img src="../../../IMG/Main/Home/icon-dashboard.png" alt="Dashboard" class="home-icon">
+                    </a>
+                </li>
+                <li>
+                    <a href="#">    
+                        <img src="../../../IMG/Main/Home/icon-bag.png" alt="Dashboard" class="home-icon">
+                    </a>
+                </li>
+                <li>
+                    <a href="#">    
+                        <img src="../../../IMG/Main/Home/icon-people.png" alt="Group" class="home-icon">
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <div class="logout-section">
+            <a href="#">
+                <img src="../../../IMG/Main/Home/icon-shutoff.png" alt="Logout" class="home-icon">
+            </a>
+        </div>
+    </div>
+    <div class="main-content">
+        <header class="main-header">
+            <div class="header-left">
+                <div class="user-info">
+                    <img src="../../../IMG/Main/Home/icon-user.png" alt="User Home" class="header-icon user-icon">
+                    <span>Hello User</span>
+                </div>
+                <div class="notification">
+                    <img src="../../../IMG/Main/Home/icon-notification.png" alt="Notification Bell" class="header-icon">
+                    <span class="notification-count">1</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="search">
+                    <img src="../../../IMG/Main/Home/icon-instruction.png" alt="Logo" class="header-icon">
+                </div>
+                <div class="search-bar">
+                    <input type="text" placeholder="Search">
+                    <img src="../../../IMG/Main/Home/icon-search.png" alt="Search" class="header-icon">
+                </div>
+            </div>
+        </header>
+        <div class="dashboard">
+            <div class="card">
+                <img src="../../../IMG/Main/TripMonitor/icon-marker.png" alt="Marker" class="icon">
+                <h3>Available Cars Nearby</h3>
+                <p>14</p>
+            </div>
+            <div class="card">
+                <img src="../../../IMG/Main/TripMonitor/icon-ticket.png" alt="Marker" class="icon">
+                <h3>Rental Cost/km</h3>
+                <p>0.008</p>
+            </div>
+            <div class="card">
+                <img src="../../../IMG/Main/TripMonitor/icon-cash.png" alt="Marker" class="icon">
+                <h3>Balance Available SOL</h3>
+                <p>3.02</p>
+            </div>
+            <div class="card">
+                <div class="info-row">
+                    <img src="../../../IMG/Main/TripMonitor/icon-fuel-tank.png" alt="Marker" class="icon">
+                    <p>78%</p>
+                </div>
+                <div class="info-row">
+                    <img src="../../../IMG/Main/TripMonitor/icon-fuel-station.png" alt="Marker" class="icon">
+                    <p>4km</p>
+                </div>
+            </div>
+        </div>
+        <div class="trip-info">
+            <div class="container">
+                <table class="trip-stats">
+                    <tr>
+                        <td>
+                            <div>
+                                <h4>Kilometers travelled</h4>
+                                <p>17km</p>
+                            </div>
+                        </td>
+                        <td>
+                            <div>
+                                <h4>Time on board</h4>
+                                <p>20'</p>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div>
+                                <h4>Kilometers remaining</h4>
+                                <p>10km</p>
+                            </div>
+                        </td>
+                        <td>
+                            <h4>Time upon arrival</h4>
+                            <p>13'</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h4>Drop off points</h4>
+                        </td>
+                        <td>
+                            <h4>Rental Duration</h4>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>  
+                            <div class="drop-off">  
+                            <div class="icon-wrapper">
+                                <img src="../../../IMG/Main/TripMonitor/icon-parking.png" alt="Drop off icon">
+                                <p>7</p>
+                            </div>
+                        </div>
+                        </td>
+                        <td>
+                            <div class="rental-chart">
+                                <div class="time-spent" style="width: 40%;"></div>
+                                <div class="active-time" style="width: 60%;"></div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+    
+            <div class="map">
+                <div id="map" style="height: 250px; width: 100%;"></div>
+                <p>You're heading towards <span>Pfäffikon</span></p>
+                <p>Your current position: <span>Wermatswile</span></p>
+                <!--button onclick="showRoute()">Mostra Percorso</button-->
+            </div>
+        </div>
+    </div>
+    <script src="../JS/script.js"></script>
+</body>
+</html>
