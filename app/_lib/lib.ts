@@ -1,7 +1,7 @@
 import "../../config";
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
 import { publicKey } from '@metaplex-foundation/umi-public-keys';
-import { fetchAllDigitalAssetByCreator, fetchDigitalAssetWithAssociatedToken } from '@metaplex-foundation/mpl-token-metadata';
+import { fetchAllDigitalAssetByCreator, fetchDigitalAssetWithAssociatedToken, mplTokenMetadata } from '@metaplex-foundation/mpl-token-metadata';
 import { IoTData } from './IoTData';
 
 /**
@@ -12,11 +12,12 @@ import { IoTData } from './IoTData';
  */
 export async function loadTokensByMachineIdAndOwner(machineId: string, ownerId: string): Promise<IoTData[]> {
     const umi = createUmi(process.env.CLUSTER_URL, "finalized");
+    umi.use(mplTokenMetadata());
     const creator = publicKey(machineId);
     const owner = publicKey(ownerId);
-
+    console.log("Fetching assets");
     const assets = await fetchAllDigitalAssetByCreator(umi, creator);
-
+    console.log("Fetching data");
     const data = await Promise.all(assets.map(async asset => {
         const assetWithToken = await fetchDigitalAssetWithAssociatedToken(umi, asset.mint.publicKey, owner);
         const uri = assetWithToken.metadata.uri;

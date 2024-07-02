@@ -2,7 +2,7 @@ import "../config";
 import { Connection, Keypair, LAMPORTS_PER_SOL } from "@solana/web3.js";
 import * as fs from 'fs';
 
-const privateKey = JSON.parse(fs.readFileSync('./machine.json', 'utf8'));
+const privateKey = JSON.parse(fs.readFileSync('./scripts/machine.json', 'utf8'));
 
 (async function () {
     const keypair = Keypair.fromSecretKey(new Uint8Array(privateKey));

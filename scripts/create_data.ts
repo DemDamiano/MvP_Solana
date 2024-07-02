@@ -1,6 +1,6 @@
 import "../config";
 import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
-import { createNft } from "@metaplex-foundation/mpl-token-metadata";
+import { createNft, mplTokenMetadata } from "@metaplex-foundation/mpl-token-metadata";
 import { createSignerFromKeypair, signerIdentity, generateSigner, percentAmount, createGenericFile } from "@metaplex-foundation/umi";
 import { irysUploader } from "@metaplex-foundation/umi-uploader-irys";
 import { base58 } from '@metaplex-foundation/umi/serializers';
@@ -19,9 +19,10 @@ import { Connection, SendTransactionError } from "@solana/web3.js";
     const machineSigner = createSignerFromKeypair(umi, machineKeypair);
     umi.use(signerIdentity(machineSigner));
     umi.use(irysUploader());
+    umi.use(mplTokenMetadata());
 
-    console.log("Machine balance", await umi.rpc.getBalance(machineKeypair.publicKey));
-    console.log("Owner balance", await umi.rpc.getBalance(ownerKeypair.publicKey));
+    console.log("Machine balance", machineKeypair.publicKey.toString(), await umi.rpc.getBalance(machineKeypair.publicKey));
+    console.log("Owner balance", ownerKeypair.publicKey.toString(), await umi.rpc.getBalance(ownerKeypair.publicKey));
 
     const data: IoTData = {
         id: "cbe0b769-ff08-4cf6-a10f-3b9d0c43539c",
@@ -78,6 +79,8 @@ import { Connection, SendTransactionError } from "@solana/web3.js";
     if (dataUri == null) {
         return;
     }
+    console.log("URI", dataUri);
+    //const dataUri = "https://arweave.net/WV_IElXfNHwa57GvYHCkYe9a8DxwMMDhJaeWKgVjpHM";
 
     const mint = generateSigner(umi);
 
@@ -85,7 +88,7 @@ import { Connection, SendTransactionError } from "@solana/web3.js";
         console.log("Creating NFT");
         const nftTransaction = await createNft(umi, {
             mint,
-            name: "cbe0b769-ff08-4cf6-a10f-3b9d0c43539c",
+            name: "test",
             uri: dataUri,
             creators:[
                 {
