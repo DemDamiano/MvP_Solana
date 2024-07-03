@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Odin - Car Reservation</title>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+        <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.css" />
+        <script src="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCKYIUUKpUGlRbuu1BFgBBv05eSvyqiUsY&libraries=places"></script>
+
+        <link rel="stylesheet" href="../../Common/STYLE/common.css">
+        <link rel="stylesheet" href="../STYLE/style.css">
+        <script src="../../Common/JS/script.js"></script>
+    </head>
+    <body>
+        <div class="main-content">
+            <div class="dashboard">
+                <div class="card">
+                    <img src="../../../IMG/Main/TripMonitor/icon-marker.png" alt="Marker" class="icon">
+                    <h3>Available Cars Nearby</h3>
+                    <p>14</p>
+                </div>
+                <div class="card">
+                    <img src="../../../IMG/Main/TripMonitor/icon-ticket.png" alt="Marker" class="icon">
+                    <h3>Rental Cost/km</h3>
+                    <p>0.008</p>
+                </div>
+                <div class="card">
+                    <img src="../../../IMG/Main/TripMonitor/icon-cash.png" alt="Marker" class="icon">
+                    <h3>Balance Available SOL</h3>
+                    <p>3.02</p>
+                </div>
+                <div class="card">
+                    <div class="info-row">
+                        <img src="../../../IMG/Main/TripMonitor/icon-fuel-tank.png" alt="Marker" class="icon">
+                        <p>78%</p>
+                    </div>
+                    <div class="info-row">
+                        <img src="../../../IMG/Main/TripMonitor/icon-fuel-station.png" alt="Marker" class="icon">
+                        <p>4km</p>
+                    </div>
+                </div>
+            </div>
+            <div class="trip-info">
+                <div class="container">
+                    <table class="trip-stats">
+                        <tr>
+                            <td>
+                                <div>
+                                    <h4>Day booked</h4>
+                                    <p>3</p>
+                                </div>
+                            </td>
+                            <td>
+                                <div>
+                                    <h4>Time on board</h4>
+                                    <p>2h50</p>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div>
+                                    <h4>Day remaining</h4>
+                                    <p>1</p>
+                                </div>
+                            </td>
+                            <td>
+                                <h4>Kilometers travelled</h4>
+                                <p>194km</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h4>Drop off points</h4>
+                            </td>
+                            <td>
+                                <h4>Rental Duration</h4>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>  
+                                <div class="drop-off">  
+                                <div class="icon-wrapper">
+                                    <img src="../../../IMG/Main/TripMonitor/icon-parking.png" alt="Drop off icon">
+                                    <p>7</p>
+                                </div>
+                            </div>
+                            </td>
+                            <td>
+                                <div class="rental-chart">
+                                    <div class="time-spent" style="width: 40%;"></div>
+                                    <div class="active-time" style="width: 60%;"></div>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+        
+                <div class="map">
+                    <div id="map" style="height: 250px; width: 100%;"></div>
+                    <p>Choose a destination</p>
+                    <input type="text" id="from-trip" name="to" class="rounded-input" placeholder="Enter start">
+                    <input type="text" id="to-trip" name="to" class="rounded-input" placeholder="Enter destination">
+                    <input type="button" class="button-search" id="search-trip" onclick="onDisplayRoute()" value="Search">
+
+                </div>
+            </div>
+        </div>
+        <script src="../JS/script.js"></script>
+    </body>
+</html>

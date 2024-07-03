@@ -20,6 +20,15 @@ function openTripMonitor() {
     }
 }
 
+function openTripManager(){
+    console.log("open TripMonitor");
+    const iframe = document.getElementById('main-content-iframe');
+    if (iframe) {
+        iframe.src = '../../TripManager/HTML/index.html';
+        setupClosePopupListener();
+    }
+}
+
 function setupClosePopupListener() {
     window.addEventListener('message', function(event) {
         if (event.data === 'closePopup') {
