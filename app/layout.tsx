@@ -16,29 +16,29 @@ const Layout = ({ children }) => {
                     <ul>
                         <li className="active">
                         <Link href="/">    
-                            <img src="./IMG/Home/iocn-home.png" alt="Home" className="home-icon" />
+                            <img src="/IMG/Home/iocn-home.png" alt="Home" className="home-icon" />
                         </Link>
                         </li>
                         <li>
                         <Link href="/trip-monitor">    
-                            <img src="./IMG/Home/icon-dashboard.png" alt="Dashboard" className="home-icon" />
+                            <img src="/IMG/Home/icon-dashboard.png" alt="Dashboard" className="home-icon" />
                         </Link>
                         </li>
                         <li>
                         <Link href="/trip-manager">    
-                            <img src="./IMG/Home/icon-bag.png" alt="Trip Manager" className="home-icon" />
+                            <img src="/IMG/Home/icon-bag.png" alt="Trip Manager" className="home-icon" />
                         </Link>
                         </li>
                         <li>
                         <Link href="/group">    
-                            <img src="./IMG/Home/icon-people.png" alt="Group" className="home-icon" />
+                            <img src="/IMG/Home/icon-people.png" alt="Group" className="home-icon" />
                         </Link>
                         </li>
                     </ul>
                     </nav>
                     <div className="logout-section">
                     <Link href="/logout">
-                        <img src="./IMG/Home/icon-shutoff.png" alt="Logout" className="home-icon" />
+                        <img src="/IMG/Home/icon-shutoff.png" alt="Logout" className="home-icon" />
                     </Link>
                     </div>
                 </div>
@@ -46,7 +46,7 @@ const Layout = ({ children }) => {
                     <header className="main-header">
                     <div className="header-left">
                         <div className="user-info">
-                        <img src="../app/IMG/Home/icon-user.png" alt="User Home" className="header-icon user-icon" />
+                        <img src="/IMG/Home/icon-user.png" alt="User Home" className="header-icon user-icon" />
                         <span>Hello User</span>
                         </div>
                         <div className="notification">
@@ -56,11 +56,11 @@ const Layout = ({ children }) => {
                     </div>
                     <div className="header-right">
                         <div className="search">
-                        <img src="./IMG/Home/icon-instruction.png" alt="Logo" className="header-icon" />
+                        <img src="/IMG/Home/icon-instruction.png" alt="Logo" className="header-icon" />
                         </div>
                         <div className="search-bar">
                         <input type="text" placeholder="Search" />
-                        <img src="./IMG/Home/icon-search.png" alt="Search" className="header-icon" />
+                        <img src="/IMG/Home/icon-search.png" alt="Search" className="header-icon" />
                         </div>
                     </div>
                     </header>
