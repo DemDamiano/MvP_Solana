@@ -1,0 +1,181 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Ensure the iframe content centers vertically too */
+    margin: 0;
+    font-family: Arial, sans-serif; /* Adjust font-family as needed */
+    background-color: #F2F3F5; /* Optional: Set a background color for better visibility */
+  }
+  
+  .reservation-forms {
+    padding: 0px;
+    display: flex;					
+    justify-content: space-between;
+    width:100%
+  }
+  
+  .main-content {
+    flex: 1;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    overflow: auto;
+  }
+  
+  .reservation-form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    width: 45%;
+  }
+  
+  .reservation-form h2 {
+    margin-top: 0;
+    color: #585E65;
+  }
+  
+  .reservation-form label {
+    display: block;
+    margin-bottom: 5px;
+    color: #777;
+  }
+  
+  .reservation-form input, .reservation-form .button-search {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .reservation-form .button-search {
+    background-color: #6200EE;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .reservation-form .button-search:hover {
+    background-color: #3700B3;
+  }
+  
+  .return-label {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+  }
+  
+  .return-label input[type="checkbox"] {
+    margin-right: 5px;
+  }
+  
+  .form-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+  }
+  
+  .input-container {
+    margin-bottom: 15px;
+    width: 70%;
+  }
+  
+  .rounded-input {
+    width: 50%;
+    padding: 12px 20px;
+    border: 2px solid #ccc;
+    border-radius: 25px;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.3s;
+  }
+  
+  .rounded-input:focus {
+    border-color: #007BFF;
+  }
+  
+  .rounded-input::placeholder {
+    color: #aaa;
+  }
+  
+  .label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  .rounded {
+    border-radius: 25px;
+  }
+  
+  .border-transition {
+    transition: border-color 0.3s;
+  }
+  
+  .focus-border-primary:focus {
+    border-color: #007BFF;
+  }
+  
+  .table-container {
+    width: 100%;
+  }
+  
+  .table-row {
+    width: 100%;
+    display: flex;
+  }
+  
+  .table-cell {
+    flex: 1;
+    padding: 10px;
+  }
+  
+  .input-group-stroke {
+    display: flex;
+    align-items: center;
+  }
+  
+  .input-group {
+    margin-bottom: 20px;
+    position: relative;
+  }
+  
+  #return-trip {
+    width: 30px;
+  }
+  
+    /* Stile base per il dropdown */
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+  
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #f9f9f9;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 1;
+    }
+  
+    .dropdown-content div {
+      color: black;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+  
+    .dropdown-content div:hover {
+      background-color: #f1f1f1;
+    }
+  
+    .show {
+      display: block;
+    }
