@@ -3,7 +3,7 @@
 
 import { useEffect, useState } from 'react';
 import Head from 'next/head';
-import "../css/home/style.css"
+import "./css/home/style.css"
 
 const Home = () => {
     const [placeDetails, setPlaceDetails] = useState([]);
@@ -66,7 +66,7 @@ const Home = () => {
     };
 
     return (
-        <html>
+        <>
             <Head>
                 <title>Odin - Car Reservation Content</title>
                 <link rel="stylesheet" href="/styles/common.css" />
@@ -152,7 +152,7 @@ const Home = () => {
                     </div>
                 </div>
             </div>
-        </html>
+        </>
     );
 };
 
