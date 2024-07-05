@@ -1,63 +1,33 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import { ConnectionProvider, WalletProvider } from '@solana/wallet-adapter-react';
-import { WalletAdapterNetwork } from '@solana/wallet-adapter-base';
-import { UnsafeBurnerWalletAdapter } from '@solana/wallet-adapter-wallets';
-import {
-    WalletModalProvider,
-    WalletDisconnectButton,
-    WalletMultiButton
-} from '@solana/wallet-adapter-react-ui';
-import { clusterApiUrl, Cluster } from '@solana/web3.js';
-import { useMemo } from "react";
+import React from 'react';
+import './common.css';
 
-const inter = Inter({ subsets: ["latin"] });
-
-export const metadata: Metadata = {
-    title: "Solana MvP",
-    description: "Our Solana MvP",
-};
-
-export default function RootLayout({
-    children,
+const Layout = ({ 
+  children 
 }: Readonly<{
-    children: React.ReactNode;
-}>) {
-    const endpoint = process.env.CLUSTER_URL;
-
-    const wallets = useMemo(
-        () => [
-            /**
-             * Wallets that implement either of these standards will be available automatically.
-             *
-             *   - Solana Mobile Stack Mobile Wallet Adapter Protocol
-             *     (https://github.com/solana-mobile/mobile-wallet-adapter)
-             *   - Solana Wallet Standard
-             *     (https://github.com/anza-xyz/wallet-standard)
-             *
-             * If you wish to support a wallet that supports neither of those standards,
-             * instantiate its legacy wallet adapter here. Common legacy adapters can be found
-             * in the npm package `@solana/wallet-adapter-wallets`.
-             */
-            new UnsafeBurnerWalletAdapter(),
-        ],
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-        [endpoint]
-    );
-
+  children: React.ReactNode;
+}>) => {
     return (
-        <html lang="en">
-            <body className={inter.className}>
-                <ConnectionProvider endpoint={endpoint}>
-                    <WalletProvider wallets={wallets} autoConnect>
-                    <WalletModalProvider>
-                        <WalletMultiButton />
-                        <WalletDisconnectButton />
-                        {children}
-                    </WalletModalProvider>
-                    </WalletProvider>
-                </ConnectionProvider>
-            </body>
-        </html>
+      <html lang="en">
+        <head>
+          <title>Car Reservation</title>
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+        </head>
+        <body>
+          <div className="container">
+            <aside className="sidebar">
+              <div className="sidebar-icon"><img src="/IMG/Main/home/icon-home.png" alt="Home" /></div>
+              <div className="sidebar-icon"><img src="/IMG/Main/home/icon-user.png" alt="User" /></div>
+              <div className="sidebar-icon"><img src="/IMG/Main/home/icon-notification.png" alt="Notifications" /></div>
+              <div className="sidebar-icon"><img src="/IMG/Main/home/icon-settings.png" alt="Settings" /></div>
+              <div className="sidebar-icon"><img src="/IMG/Main/home/icon-logout.png" alt="Logout" /></div>
+            </aside>
+            <main className="main-content">
+              {children}
+            </main>
+          </div>
+        </body>
+      </html>
     );
-}
+  };
+  
+  export default Layout;
