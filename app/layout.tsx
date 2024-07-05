@@ -12,7 +12,7 @@ const Layout = ({ children }) => {
         <body>
           <div className="container">
             <aside className="sidebar">
-              <div className="sidebar-icon"><img src="/IMG/home/home-icon.svg" alt="Home" /></div>
+              <div className="sidebar-icon"><img src="/IMG/home/icon-home.png" alt="Home" /></div>
               <div className="sidebar-icon"><img src="/IMG/home/user-icon.svg" alt="User" /></div>
               <div className="sidebar-icon"><img src="/IMG/home/notification-icon.svg" alt="Notifications" /></div>
               <div className="sidebar-icon"><img src="/IMG/home/settings-icon.svg" alt="Settings" /></div>
