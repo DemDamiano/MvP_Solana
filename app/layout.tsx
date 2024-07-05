@@ -1,7 +1,23 @@
-import React from 'react';
+'use client'; // Aggiungi questa linea all'inizio del file
+import CarReservation from './page';
+import TripMonitor from './tripMonitor';
+import React, { useState } from 'react';
 import './common.css';
 
 const Layout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
+  const [currentPage, setCurrentPage] = useState('reservation'); // stato per tracciare la pagina corrente
+
+  const renderPageContent = () => {
+    switch (currentPage) {
+      case 'reservation':
+        return <CarReservation />;
+      case 'tripMonitor':
+        return <TripMonitor />;
+      default:
+        return <CarReservation />;
+    }
+  };
+
   return (
     <html lang="en">
       <head>
@@ -18,12 +34,12 @@ const Layout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
             <ul>
               <li className="active">
                 <a href="#">
-                  <img  src="/IMG/Main/Home/icon-home.png" alt="Home" className="home-icon" />
+                  <img src="/IMG/Main/Home/icon-home.png" onClick={() => setCurrentPage('reservation')} alt="Home" className="home-icon" />
                 </a>
               </li>
               <li>
                 <a href="#">
-                  <img src="/IMG/Main/Home/icon-dashboard.png" alt="Dashboard" className="home-icon" />
+                  <img src="/IMG/Main/Home/icon-dashboard.png" onClick={() => setCurrentPage('tripMonitor')} alt="Dashboard" className="home-icon" />
                 </a>
               </li>
               <li>
@@ -66,8 +82,9 @@ const Layout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
               </div>
             </div>
           </header>
+         
           <main className="main-content">
-            {children}
+            {renderPageContent()}
           </main>
         </div>
       </body>
