@@ -1,75 +1,30 @@
 import React from 'react';
-import Link from 'next/link';
-import  './css/common/style.css';
+import Head from 'next/head';
+import './css/home/style.css';
 
 const Layout = ({ children }) => {
-  return (
-    <html>
+    return (
+      <html lang="en">
+        <Head>
+          <title>Car Reservation</title>
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+        </Head>
         <body>
-            <div className="layout">
-                <div className="sidebar">
-                    <div className="user-section">
-                    <div className="user-icon"></div>
-                    <p>Hello User</p>
-                    </div>
-                    <nav>
-                    <ul>
-                        <li className="active">
-                        <Link href="/">    
-                            <img src="/IMG/Home/iocn-home.png" alt="Home" className="home-icon" />
-                        </Link>
-                        </li>
-                        <li>
-                        <Link href="/trip-monitor">    
-                            <img src="/IMG/Home/icon-dashboard.png" alt="Dashboard" className="home-icon" />
-                        </Link>
-                        </li>
-                        <li>
-                        <Link href="/trip-manager">    
-                            <img src="/IMG/Home/icon-bag.png" alt="Trip Manager" className="home-icon" />
-                        </Link>
-                        </li>
-                        <li>
-                        <Link href="/group">    
-                            <img src="/IMG/Home/icon-people.png" alt="Group" className="home-icon" />
-                        </Link>
-                        </li>
-                    </ul>
-                    </nav>
-                    <div className="logout-section">
-                    <Link href="/logout">
-                        <img src="/IMG/Home/icon-shutoff.png" alt="Logout" className="home-icon" />
-                    </Link>
-                    </div>
-                </div>
-                <div className="main-content">
-                    <header className="main-header">
-                    <div className="header-left">
-                        <div className="user-info">
-                        <img src="/IMG/Home/icon-user.png" alt="User Home" className="header-icon user-icon" />
-                        <span>Hello User</span>
-                        </div>
-                        <div className="notification">
-                        <img src="./IMG/Home/icon-notification.png" alt="Notification Bell" className="header-icon" />
-                        <span className="notification-count">1</span>
-                        </div>
-                    </div>
-                    <div className="header-right">
-                        <div className="search">
-                        <img src="/IMG/Home/icon-instruction.png" alt="Logo" className="header-icon" />
-                        </div>
-                        <div className="search-bar">
-                        <input type="text" placeholder="Search" />
-                        <img src="/IMG/Home/icon-search.png" alt="Search" className="header-icon" />
-                        </div>
-                    </div>
-                    </header>
-                    {children}
-                </div>
-            </div>
+          <div className="container">
+            <aside className="sidebar">
+              <div className="sidebar-icon"><img src="/IMG/home/home-icon.svg" alt="Home" /></div>
+              <div className="sidebar-icon"><img src="/IMG/home/user-icon.svg" alt="User" /></div>
+              <div className="sidebar-icon"><img src="/IMG/home/notification-icon.svg" alt="Notifications" /></div>
+              <div className="sidebar-icon"><img src="/IMG/home/settings-icon.svg" alt="Settings" /></div>
+              <div className="sidebar-icon"><img src="/IMG/home/logout-icon.svg" alt="Logout" /></div>
+            </aside>
+            <main className="main-content">
+              {children}
+            </main>
+          </div>
         </body>
-    </html>
-  );
-};
-
-export default Layout;
+      </html>
+    );
+  };
+  
+  export default Layout;
