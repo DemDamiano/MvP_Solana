@@ -1,14 +1,17 @@
 import React from 'react';
-import Head from 'next/head';
-import './css/home/style.css';
+import './common.css';
 
-const Layout = ({ children }) => {
+const Layout = ({ 
+  children 
+}: Readonly<{
+  children: React.ReactNode;
+}>) => {
     return (
       <html lang="en">
-        <Head>
+        <head>
           <title>Car Reservation</title>
           <meta name="viewport" content="width=device-width, initial-scale=1" />
-        </Head>
+        </head>
         <body>
           <div className="container">
             <aside className="sidebar">

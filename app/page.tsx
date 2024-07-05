@@ -1,13 +1,12 @@
 import React from 'react';
-//import './css/home/style.css';
-import Layout from './layout';
+import './page.module.css';
 
 const CarReservation = () => {
   return (
-    <Layout>
+    <>
       <header className="header">
         <div className="header-user">Hello User</div>
-        <div className="header-notification"><img src="/IMG/home/notification-icon.svg" alt="Notifications" /></div>
+        <div className="header-notification"><img src="/IMG/Main/Home/icon-notification.png" alt="Notifications" /></div>
       </header>
       <div className="search-container">
         <h1>Odin</h1>
@@ -39,7 +38,7 @@ const CarReservation = () => {
           </div>
         </div>
       </div>
-    </Layout>
+    </>  
   );
 };
 
