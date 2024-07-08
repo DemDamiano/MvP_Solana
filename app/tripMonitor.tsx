@@ -147,8 +147,7 @@ const TripMonitor = () => {
 
         <div className="map">
           <LoadScript
-            googleMapsApiKey="AIzaSyCKYIUUKpUGlRbuu1BFgBBv05eSvyqiUsY&libraries"
-            libraries={['directions']}
+            googleMapsApiKey="AIzaSyCKYIUUKpUGlRbuu1BFgBBv05eSvyqiUsY"
           >
             <GoogleMap
               mapContainerStyle={{ height: '250px', width: '100%' }}
