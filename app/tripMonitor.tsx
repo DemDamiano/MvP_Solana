@@ -1,40 +1,38 @@
 import React, { useEffect, useState } from 'react';
-import { GoogleMap, LoadScript, DirectionsService, DirectionsRenderer } from '@react-google-maps/api';
+import { GoogleMap, LoadScript, DirectionsRenderer } from '@react-google-maps/api';
 import './tripMonitor.css';
 
+const containerStyle = {
+  height: '250px',
+  width: '100%'
+};
+
+const center = {
+  lat: 41.9028,
+  lng: 12.4964
+};
+
 const TripMonitor = () => {
+  const [availableCars, setAvailableCars] = useState(0);
+  const [rentalCost, setRentalCost] = useState(0);
+  const [balance, setBalance] = useState(0);
+  const [fuelPercentage, setFuelPercentage] = useState(0);
+  const [fuelDistance, setFuelDistance] = useState(0);
   const [directions, setDirections] = useState(null);
 
   useEffect(() => {
-    retrievePlaceDetails();
+    fetchIoTData(); // Fetch IoT data when component mounts
   }, []);
 
-  const retrievePlaceDetails = () => {
-    let storedPlaceDetails = localStorage.getItem('placeDetails');
-    if (storedPlaceDetails) {
-      const placeDetails = JSON.parse(storedPlaceDetails);
-      console.log('placeDetails recuperato da localStorage', placeDetails);
-      updateSpanValues(placeDetails);
-    } else {
-      console.error('Nessun placeDetails trovato in localStorage');
-    }
-  };
-
-  const updateSpanValues = (placeDetails) => {
-    let startPlace = placeDetails.find(detail => detail.action.includes('from'));
-    let endPlace = placeDetails.find(detail => detail.action.includes('to'));
-
-    if (startPlace) {
-      document.getElementById('current-position').innerText = startPlace.placeName;
-    }
-    if (endPlace) {
-      document.getElementById('destination').innerText = endPlace.placeName;
-    }
-
-    // Calcola le indicazioni stradali solo se ci sono entrambi i punti di partenza e destinazione
-    if (startPlace && endPlace) {
-      calculateDirections(startPlace.latitude, startPlace.longitude, endPlace.latitude, endPlace.longitude);
-    }
+  const fetchIoTData = () => {
+    // Assume fetching logic here (mocked for demonstration)
+    // Replace with actual data fetching from your IoT source
+    // Example placeholder values
+    setAvailableCars(14);
+    setRentalCost(0.008);
+    setBalance(3.02);
+    setFuelPercentage(78);
+    setFuelDistance(4);
   };
 
   const calculateDirections = (startLat, startLng, endLat, endLng) => {
@@ -62,26 +60,26 @@ const TripMonitor = () => {
         <div className="card">
           <img src="/IMG/Main/TripMonitor/icon-marker.png" alt="Marker" className="icon" />
           <h3>Available Cars Nearby</h3>
-          <p>14</p>
+          <p>{availableCars}</p>
         </div>
         <div className="card">
           <img src="/IMG/Main/TripMonitor/icon-ticket.png" alt="Marker" className="icon" />
           <h3>Rental Cost/km</h3>
-          <p>0.008</p>
+          <p>{rentalCost}</p>
         </div>
         <div className="card">
           <img src="/IMG/Main/TripMonitor/icon-cash.png" alt="Marker" className="icon" />
           <h3>Balance Available SOL</h3>
-          <p>3.02</p>
+          <p>{balance}</p>
         </div>
         <div className="card">
           <div className="info-row">
             <img src="/IMG/Main/TripMonitor/icon-fuel-tank.png" alt="Marker" className="icon" />
-            <p>78%</p>
+            <p>{fuelPercentage}%</p>
           </div>
           <div className="info-row">
             <img src="/IMG/Main/TripMonitor/icon-fuel-station.png" alt="Marker" className="icon" />
-            <p>4km</p>
+            <p>{fuelDistance}km</p>
           </div>
         </div>
       </div>
@@ -89,7 +87,7 @@ const TripMonitor = () => {
         <div className="container">
           <table className="trip-stats">
             <tbody>
-              <tr>
+            <tr>
                 <td>
                   <div>
                     <h4>Kilometers travelled</h4>
@@ -146,12 +144,10 @@ const TripMonitor = () => {
         </div>
 
         <div className="map">
-          <LoadScript
-            googleMapsApiKey="AIzaSyCKYIUUKpUGlRbuu1BFgBBv05eSvyqiUsY"
-          >
+          <LoadScript googleMapsApiKey="AIzaSyCKYIUUKpUGlRbuu1BFgBBv05eSvyqiUsY" libraries={['places']}>
             <GoogleMap
-              mapContainerStyle={{ height: '250px', width: '100%' }}
-              center={{ lat: 41.9028, lng: 12.4964 }} // Coordinate di Roma
+              mapContainerStyle={containerStyle}
+              center={center}
               zoom={7}
             >
               {directions && <DirectionsRenderer directions={directions} />}

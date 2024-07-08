@@ -1,15 +1,30 @@
+// CarReservation.js
 import React, { useState } from 'react';
 import { LoadScript, Autocomplete } from '@react-google-maps/api';
 import './carReservation.css';
 
-const CarReservation: React.FC = () => {
-  const [placeDetails, setPlaceDetails] = useState<any[]>([]); // State to store place details
-  const [autocompleteFrom, setAutocompleteFrom] = useState<any>(null); // State to store Autocomplete instance for 'From'
-  const [autocompleteTo, setAutocompleteTo] = useState<any>(null); // State to store Autocomplete instance for 'To'
+const CarReservation = () => {
+  const [placeDetails, setPlaceDetails] = useState([]); // State to store place details
 
-  // Function to handle place selection and update state
-  const getPlaceDetails = (place: google.maps.places.PlaceResult | null, action: string) => {
-    if (!place?.geometry) {
+  // States for 'Trip' form
+  const [autocompleteFromTrip, setAutocompleteFromTrip] = useState(null);
+  const [autocompleteToTrip, setAutocompleteToTrip] = useState(null);
+
+  // States for 'Day' form
+  const [autocompleteFromDay, setAutocompleteFromDay] = useState(null);
+  const [autocompleteToDay, setAutocompleteToDay] = useState(null);
+
+  const callTripMonitor = () => {
+    if (placeDetails.length > 0) {
+      localStorage.setItem('placeDetails', JSON.stringify(placeDetails));
+      history.push('/tripMonitor'); // Utilizza history.push per navigare a tripMonitor
+    } else {
+      console.error("No place details found.");
+    }
+  };
+
+  const getPlaceDetails = (place, action) => {
+    if (!place || !place.geometry) {
       console.error('Place details not available for ', place);
       return;
     }
@@ -25,19 +40,49 @@ const CarReservation: React.FC = () => {
       placeName,
     };
 
-    setPlaceDetails([...placeDetails, newPlaceDetails]);
+    setPlaceDetails(prevPlaceDetails => [...prevPlaceDetails, newPlaceDetails]);
   };
 
-  // Function to handle Autocomplete onLoad
-  const handleAutocompleteLoad = (autocomplete: any, type: string) => {
-    if (type === 'from') {
-      setAutocompleteFrom(autocomplete);
-    } else if (type === 'to') {
-      setAutocompleteTo(autocomplete);
+  const handleAutocompleteLoad = (autocomplete, type, formType) => {
+    console.log(`Autocomplete loaded for ${type}`, autocomplete);
+    if (formType === 'trip') {
+      if (type === 'from') {
+        setAutocompleteFromTrip(autocomplete);
+      } else if (type === 'to') {
+        setAutocompleteToTrip(autocomplete);
+      }
+    } else if (formType === 'day') {
+      if (type === 'from') {
+        setAutocompleteFromDay(autocomplete);
+      } else if (type === 'to') {
+        setAutocompleteToDay(autocomplete);
+      }
     }
   };
 
-  // Rendering function for reservation form
+  const handlePlaceChanged = (type, formType) => {
+    let autocomplete;
+    if (formType === 'trip') {
+      autocomplete = type === 'from' ? autocompleteFromTrip : autocompleteToTrip;
+    } else if (formType === 'day') {
+      autocomplete = type === 'from' ? autocompleteFromDay : autocompleteToDay;
+    }
+
+    if (!autocomplete) {
+      console.error(`Autocomplete instance not available for ${type}`);
+      return;
+    }
+    
+    const place = autocomplete.getPlace();
+    console.log(`Place changed for ${type}`, place);
+
+    if (place && place.geometry) {
+      getPlaceDetails(place, `${type}-${formType}`);
+    } else {
+      console.error('Place details not available for ', place);
+    }
+  };
+
   const renderReservationForm = () => (
     <div className="reservation-forms">
       <div className="reservation-form" id="trip-form">
@@ -49,8 +94,8 @@ const CarReservation: React.FC = () => {
                 <div className="input-container">
                   <label htmlFor="from-trip" className="label">From</label>
                   <Autocomplete
-                    onLoad={(autocomplete) => handleAutocompleteLoad(autocomplete, 'from')}
-                    onPlaceChanged={() => getPlaceDetails(autocompleteFrom.getPlace(), 'from-trip')}
+                    onLoad={(autocomplete) => handleAutocompleteLoad(autocomplete, 'from', 'trip')}
+                    onPlaceChanged={() => handlePlaceChanged('from', 'trip')}
                   >
                     <input
                       type="text"
@@ -66,8 +111,8 @@ const CarReservation: React.FC = () => {
                 <div className="input-container">
                   <label htmlFor="to-trip" className="label">To</label>
                   <Autocomplete
-                    onLoad={(autocomplete) => handleAutocompleteLoad(autocomplete, 'to')}
-                    onPlaceChanged={() => getPlaceDetails(autocompleteTo.getPlace(), 'to-trip')}
+                    onLoad={(autocomplete) => handleAutocompleteLoad(autocomplete, 'to', 'trip')}
+                    onPlaceChanged={() => handlePlaceChanged('to', 'trip')}
                   >
                     <input
                       type="text"
@@ -96,11 +141,7 @@ const CarReservation: React.FC = () => {
             </tr>
           </tbody>
         </table>
-        <div className="input-container input-group input-group-stroke">
-          <label className="return-label">Return stroke?</label>
-          <input type="checkbox" id="return-trip" name="return" />
-        </div>
-        <input type="button" className="button-search" id="search-trip" value="Search" />
+        <input type="button" onClick={() => callTripMonitor()} className="button-search" id="search-trip" value="Search" />
       </div>
       <div className="reservation-form" id="day-form">
         <h2>Reserve a car for a day or some</h2>
@@ -111,8 +152,8 @@ const CarReservation: React.FC = () => {
                 <div className="input-container">
                   <label htmlFor="from-trip-day" className="label">From</label>
                   <Autocomplete
-                    onLoad={(autocomplete) => handleAutocompleteLoad(autocomplete, 'from')}
-                    onPlaceChanged={() => getPlaceDetails(autocompleteFrom.getPlace(), 'from-trip-day')}
+                    onLoad={(autocomplete) => handleAutocompleteLoad(autocomplete, 'from', 'day')}
+                    onPlaceChanged={() => handlePlaceChanged('from', 'day')}
                   >
                     <input type="text" id="from-trip-day" name="from-trip-day" className="rounded-input" placeholder="Enter location" />
                   </Autocomplete>
@@ -122,8 +163,8 @@ const CarReservation: React.FC = () => {
                 <div className="input-container">
                   <label htmlFor="to-trip-day" className="label">To</label>
                   <Autocomplete
-                    onLoad={(autocomplete) => handleAutocompleteLoad(autocomplete, 'to')}
-                    onPlaceChanged={() => getPlaceDetails(autocompleteTo.getPlace(), 'to-trip-day')}
+                    onLoad={(autocomplete) => handleAutocompleteLoad(autocomplete, 'to', 'day')}
+                    onPlaceChanged={() => handlePlaceChanged('to', 'day')}
                   >
                     <input type="text" id="to-trip-day" name="to-trip-day" className="rounded-input" placeholder="Enter destination" />
                   </Autocomplete>
@@ -146,7 +187,7 @@ const CarReservation: React.FC = () => {
             </tr>
           </tbody>
         </table>
-        <input type="button" className="button-search" id="search-trip-day" value="Search" />
+        <input type="button" onClick={() => callTripMonitor()} className="button-search" id="search-trip-day" value="Search" />
       </div>
     </div>
   );

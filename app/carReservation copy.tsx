@@ -5,6 +5,9 @@ import './carReservation.css';
 const CarReservation: React.FC = () => {
   const [placeDetails, setPlaceDetails] = useState<any[]>([]); // State to store place details
 
+  let latitude;
+  let longitude;
+  let placeName;
   // Function to handle place selection and update state
   const getPlaceDetails = (place: google.maps.places.PlaceResult | null, action: string) => {
     if (!place?.geometry) {
@@ -12,9 +15,9 @@ const CarReservation: React.FC = () => {
       return;
     }
 
-    const latitude = place.geometry.location.lat();
-    const longitude = place.geometry.location.lng();
-    const placeName = place.name;
+    latitude = place.geometry.location.lat();
+    longitude = place.geometry.location.lng();
+    placeName = place.name;
 
     const newPlaceDetails = {
       action,
