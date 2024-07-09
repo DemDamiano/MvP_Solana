@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { GoogleMap, LoadScript, DirectionsRenderer,DirectionsService } from '@react-google-maps/api';
 import './tripMonitor.css';
+import machineKey from '../scripts/owner.json'
+import ownerKey from '../scripts/machine.json'
 
 const containerStyle = {
   height: '250px',
@@ -40,10 +42,10 @@ const TripMonitor = () => {
     }
   }, [storedData]);
 
-  const fetchIoTData = () => {
+  const fetchIoTData =async () => {
     // Fetch the machine and owner public keys
-    const machinePublicKey = 'your-machine-public-key'; // Replace with actual machine public key
-    const ownerPublicKey = 'your-owner-public-key'; // Replace with actual owner public key
+    const machinePublicKey = machineKey; // Replace with actual machine public key
+    const ownerPublicKey = ownerKey; // Replace with actual owner public key
 
     try {
       const iotDataArray = await loadTokensByMachineIdAndOwner(machinePublicKey, ownerPublicKey);
