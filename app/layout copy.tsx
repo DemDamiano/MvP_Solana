@@ -1,9 +1,8 @@
 'use client';
 import React, { useState } from 'react';
-import CarReservation from './carReservation'; // Make sure this path is correct
-import TripMonitor from './tripMonitor'; // Make sure this path is correct
-import LoginPage from './login'; // Make sure this path is correct
-import { PlaceDetailsProvider } from './placeDetailsContext';
+import CarReservation from './CarReservation'; // Make sure this path is correct
+import TripMonitor from './TripMonitor'; // Make sure this path is correct
+import LoginPage from './Login'; // Make sure this path is correct
 import './common.css';
 
 const Layout = ({ children }) => {

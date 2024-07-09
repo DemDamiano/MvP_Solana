@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { GoogleMap, LoadScript, DirectionsRenderer,DirectionsService } from '@react-google-maps/api';
+import { GoogleMap, LoadScript, DirectionsRenderer } from '@react-google-maps/api';
 import './tripMonitor.css';
 
 const containerStyle = {
@@ -41,64 +41,43 @@ const TripMonitor = () => {
   }, [storedData]);
 
   const fetchIoTData = () => {
-    // Fetch the machine and owner public keys
-    const machinePublicKey = 'your-machine-public-key'; // Replace with actual machine public key
-    const ownerPublicKey = 'your-owner-public-key'; // Replace with actual owner public key
-
-    try {
-      const iotDataArray = await loadTokensByMachineIdAndOwner(machinePublicKey, ownerPublicKey);
-
-      if (iotDataArray.length > 0) {
-        // Assuming the first element in the array for simplicity
-        const iotData = iotDataArray[0];
-
-        // Update state variables with fetched IoT data
-        setAvailableCars(iotData.sensors.find(sensor => sensor.type === 'availableCars')?.data[0] || 0);
-        setRentalCost(iotData.sensors.find(sensor => sensor.type === 'rentalCost')?.data[0] || 0);
-        setBalance(iotData.sensors.find(sensor => sensor.type === 'balance')?.data[0] || 0);
-        setFuelPercentage(iotData.sensors.find(sensor => sensor.type === 'fuelPercentage')?.data[0] || 0);
-        setFuelDistance(iotData.sensors.find(sensor => sensor.type === 'fuelDistance')?.data[0] || 0);
-      }
-    } catch (error) {
-      console.error('Error fetching IoT data:', error);
-    }
+    // Assume fetching logic here (mocked for demonstration)
+    // Replace with actual data fetching from your IoT source
+    // Example placeholder values
+    setAvailableCars(14);
+    setRentalCost(0.008);
+    setBalance(3.02);
+    setFuelPercentage(78);
+    setFuelDistance(4);
   };
 
   const calculateDirections = (startLat, startLng, endLat, endLng) => {
+    const { google } = this.props;
     const directionsService = new window.google.maps.DirectionsService();
-    center={
+
+    console.log("tripmonitor start lat ",startLat, " startLong ",startLng, " endLat ",endLat ," endLng ",endLng)
+    center = {
       lat: startLat,
       lng: startLng
-    }
-    const origin = { lat: startLat, lng: startLng };
-    const destination = { lat: endLat, lng: endLng };
-
-    console.log("origin ",origin, " destination ",destination)
+    }; 
+    const origin = { lat: startLat, lng: startLng }; // Chicago, IL
+    const destination = { lat: endLat, lng: endLng}; // Los Angeles, CA
 
     directionsService.route(
-      {
-        origin: origin,
-        destination: destination,
-        travelMode: window.google.maps.TravelMode.DRIVING
-      },
-      (result, status) => {
-        console.log("end operation result ",result," status ",status)
-        setDirections(result);
-        switch (status) {
-          case window.google.maps.DirectionsStatus.OK:
-              setDirections(result);
-              break;
-          case window.google.maps.DirectionsStatus.ZERO_RESULTS:
-              console.error('Nessun risultato trovato per la richiesta di direzioni.');
-              break;
-          case window.google.maps.DirectionsStatus.NOT_FOUND:
-              console.error('Uno o entrambi i punti di partenza/arrivo non sono validi.');
-              break;
-          // Aggiungi gestione per altri stati di errore se necessario
-          default:
-              console.error(`Errore nel recupero delle direzioni. Status: ${status}`);
-      }
-      }
+        {
+            origin: origin,
+            destination: destination,
+            travelMode: google.maps.TravelMode.DRIVING
+        },
+        (result, status) => {
+            if (status === google.maps.DirectionsStatus.OK) {
+                this.setState({
+                    directions: result
+                });
+            } else {
+                console.error(`error fetching directions ${result}`);
+            }
+        }
     );
   };
 
@@ -192,13 +171,13 @@ const TripMonitor = () => {
         </div>
 
         <div className="map">
-          <LoadScript googleMapsApiKey="AIzaSyCKYIUUKpUGlRbuu1BFgBBv05eSvyqiUsY" libraries={[ 'places']}>
+          <LoadScript googleMapsApiKey="AIzaSyCKYIUUKpUGlRbuu1BFgBBv05eSvyqiUsY" libraries={['places']}>
             <GoogleMap
               mapContainerStyle={containerStyle}
               center={center}
               zoom={7}
             >
-            {directions && <DirectionsRenderer directions={directions} />}
+              {directions && <DirectionsRenderer directions={directions} />}
             </GoogleMap>
           </LoadScript>
           <p>Start Address: {directions?.routes[0]?.legs[0]?.start_address}</p>
