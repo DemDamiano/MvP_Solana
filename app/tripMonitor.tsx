@@ -1,8 +1,11 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { GoogleMap, LoadScript, DirectionsRenderer,DirectionsService } from '@react-google-maps/api';
 import './tripMonitor.css';
-import machineKey from '../scripts/owner.json'
-import ownerKey from '../scripts/machine.json'
+import machineKey from '../scripts/machine.json'
+import ownerKey from '../scripts/owner.json'
+import { loadTokensByMachineIdAndOwner } from  "../app/_lib/lib"
+import { Connection, Keypair, LAMPORTS_PER_SOL } from "@solana/web3.js";
+import { createSignerFromKeypair, signerIdentity, generateSigner, percentAmount, createGenericFile } from "@metaplex-foundation/umi";
 
 const containerStyle = {
   height: '250px',
@@ -44,17 +47,23 @@ const TripMonitor = () => {
 
   const fetchIoTData =async () => {
     // Fetch the machine and owner public keys
-    const machinePublicKey = machineKey; // Replace with actual machine public key
-    const ownerPublicKey = ownerKey; // Replace with actual owner public key
-
+    
+    //let machineKeyString = machineKey.toString()
+    //let ownerKeyString = ownerKey.toString()
+    
+    let machinePublicKey = Keypair.fromSecretKey(new Uint8Array(machineKey)).publicKey; // Replace with actual machine public key
+    let ownerPublicKey = Keypair.fromSecretKey(new Uint8Array(ownerKey)).publicKey;// Replace with actual owner public key
+    
+    //machinePublicKey = machinePublicKey.publicKey
+   // ownerPublicKey = ownerPublicKey.publicKey
+    
+    console.log('fetchIoTData ',machinePublicKey, ' ', ownerPublicKey)
     try {
       const iotDataArray = await loadTokensByMachineIdAndOwner(machinePublicKey, ownerPublicKey);
-
+      console.log("iotDataArray ",iotDataArray)
       if (iotDataArray.length > 0) {
-        // Assuming the first element in the array for simplicity
         const iotData = iotDataArray[0];
 
-        // Update state variables with fetched IoT data
         setAvailableCars(iotData.sensors.find(sensor => sensor.type === 'availableCars')?.data[0] || 0);
         setRentalCost(iotData.sensors.find(sensor => sensor.type === 'rentalCost')?.data[0] || 0);
         setBalance(iotData.sensors.find(sensor => sensor.type === 'balance')?.data[0] || 0);

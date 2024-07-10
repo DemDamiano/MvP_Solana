@@ -74,33 +74,19 @@ const LoginPage = ({ onLogin }) => {
       <div className="carousel active">
         <div className="carousel-item active">
           <img src="/IMG/Login/Carousel/1.png" alt="Car 1" />
-          <div className="carousel-caption">
-            <h2>Connected. Informed. Secure.</h2>
-            <p>Welcome to Odin</p>
-          </div>
+       
         </div>
         <div className="carousel-item">
           <img src="/IMG/Login/Carousel/3.png" alt="Car 2" />
-          <div className="carousel-caption">
-            <h2>Drive into the future of trasportation with Odin.</h2>
-            <p>Welcome to Odin</p>
-          </div>
+         
         </div>
         <div className="carousel-item">
           <img src="/IMG/Login/Carousel/5.png" alt="Car 2" />
-          <div className="carousel-caption">
-            <h3>A suite of innovative features desifned to enhance your car-sharing experience</h3>
-            <h5>With the blockchain-based system, Odin provides unmatched security and transparency for all transaction</h5>
-            <h4>Enjoy real-time vehicle availability, smart contracts for hassle-free rentals, and advanced user authentication</h4>
-          </div>
+         
         </div>
         <div className="carousel-item">
           <img src="/IMG/Login/Carousel/7.png" alt="Car 2" />
-          <div className="carousel-caption">
-            <h5>Wisdom in Motion</h5>
-            <h2>Odin</h2>
-            <h3>Experience the next level of car sharing</h3>
-          </div>
+   
         </div>
       </div>
     </div>
