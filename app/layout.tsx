@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import CarReservation from './carReservation'; // Make sure this path is correct
 import TripMonitor from './tripMonitor'; // Make sure this path is correct
+import TripManager from './tripManager'
 import LoginPage from './login'; // Make sure this path is correct
 import { PlaceDetailsProvider } from './placeDetailsContext';
 import './common.css';
@@ -27,6 +28,8 @@ const Layout = ({ children }) => {
         return <CarReservation carReservation={handleCarReservation} />;
       case 'tripMonitor':
         return <TripMonitor />;
+      case 'tripManager':
+        return <TripManager />;
       default:
         return <CarReservation carReservation={handleCarReservation} />;
     }
@@ -58,7 +61,7 @@ const Layout = ({ children }) => {
                   </a>
                 </li>
                 <li>
-                  <a href="#">
+                  <a href="#" onClick={() => setCurrentPage('tripManager')}>
                     <img src="/IMG/Main/Home/icon-bag.png" alt="Dashboard" className="home-icon" />
                   </a>
                 </li>

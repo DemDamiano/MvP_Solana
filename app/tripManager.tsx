@@ -1,6 +1,12 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { GoogleMap, LoadScript, DirectionsRenderer } from '@react-google-maps/api';
-import './tripMonitor.css';
+
+import { GoogleMap,Autocomplete, LoadScript, DirectionsRenderer,DirectionsService } from '@react-google-maps/api';
+import './tripManager.css';
+import machineKey from '../scripts/machine.json'
+import ownerKey from '../scripts/owner.json'
+import { loadTokensByMachineIdAndOwner } from  "../app/_lib/lib"
+import { Connection, Keypair, LAMPORTS_PER_SOL } from "@solana/web3.js";
+import { createSignerFromKeypair, signerIdentity, generateSigner, percentAmount, createGenericFile } from "@metaplex-foundation/umi";
 
 const containerStyle = {
   height: '250px',
@@ -21,6 +27,13 @@ const TripMonitor = () => {
   const [directions, setDirections] = useState(null);
   const [storedData, setStoredData] = useState([]);
 
+  
+  const [placeDetails, setPlaceDetails] = useState([]); // State to store place details
+
+  // States for 'Trip' form
+  const [autocompleteFromTrip, setAutocompleteFromTrip] = useState(null);
+  const [autocompleteToTrip, setAutocompleteToTrip] = useState(null);
+
   useEffect(() => {
     console.log("Inside useEffect");
     fetchIoTData(); // Fetch IoT data when component mounts
@@ -40,15 +53,38 @@ const TripMonitor = () => {
     }
   }, [storedData]);
 
-  const fetchIoTData = () => {
-    // Assume fetching logic here (mocked for demonstration)
-    // Replace with actual data fetching from your IoT source
-    // Example placeholder values
-    setAvailableCars(14);
-    setRentalCost(0.008);
-    setBalance(3.02);
-    setFuelPercentage(78);
-    setFuelDistance(4);
+  const fetchIoTData =async () => {
+    // Fetch the machine and owner public keys
+    
+    //let machineKeyString = machineKey.toString()
+    //let ownerKeyString = ownerKey.toString()
+    
+    let machinePublicKey = Keypair.fromSecretKey(new Uint8Array(machineKey)).publicKey; // Replace with actual machine public key
+    let ownerPublicKey = Keypair.fromSecretKey(new Uint8Array(ownerKey)).publicKey;// Replace with actual owner public key
+    
+    //machinePublicKey = machinePublicKey.publicKey
+   // ownerPublicKey = ownerPublicKey.publicKey
+    
+    console.log('fetchIoTData ',machinePublicKey, ' ', ownerPublicKey)
+    try {
+      const iotDataArray = await loadTokensByMachineIdAndOwner(machinePublicKey, ownerPublicKey);
+      console.log("iotDataArray ",iotDataArray)
+      if (iotDataArray.length > 0) {
+        let nftLoadedCorrectly =0;
+        for(let i=0;i<iotDataArray.length;i++){
+          if(iotDataArray[i].sensors.length>4) nftLoadedCorrectly = i
+        }
+        const iotData = iotDataArray[nftLoadedCorrectly];
+
+        setAvailableCars(iotData.sensors.find(sensor => sensor.type === 'availableCars')?.data[0] || 0);
+        setRentalCost(iotData.sensors.find(sensor => sensor.type === 'rentalCost')?.data[0] || 0);
+        setBalance(iotData.sensors.find(sensor => sensor.type === 'balance')?.data[0] || 0);
+        setFuelPercentage(iotData.sensors.find(sensor => sensor.type === 'fuel_pump')?.data[0] || 0);
+        setFuelDistance(iotData.sensors.find(sensor => sensor.type === 'fuelDistance')?.data[0] || 0);
+      }
+    } catch (error) {
+      console.error('Error fetching IoT data:', error);
+    }
   };
 
   const calculateDirections = (startLat, startLng, endLat, endLng) => {
@@ -88,7 +124,55 @@ const TripMonitor = () => {
       }
     );
   };
+  const getPlaceDetails = (place, action) => {
+    if (!place || !place.geometry) {
+      console.error('Place details not available for ', place);
+      return;
+    }
 
+    const latitude = place.geometry.location.lat();
+    const longitude = place.geometry.location.lng();
+    const placeName = place.name;
+
+    const newPlaceDetails = {
+      action,
+      latitude,
+      longitude,
+      placeName,
+    };
+
+    setPlaceDetails((prevPlaceDetails) => [...prevPlaceDetails, newPlaceDetails]);
+  };
+
+  const handleAutocompleteLoad = (autocomplete, type) => {
+    console.log(`Autocomplete loaded for ${type}`, autocomplete);
+      if (type === 'from') {
+        setAutocompleteFromTrip(autocomplete);
+      } else if (type === 'to') {
+        setAutocompleteToTrip(autocomplete);
+      }
+    
+  };
+
+  const handlePlaceChanged = (type) => {
+    let autocomplete;
+    autocomplete = type === 'from' ? autocompleteFromTrip : autocompleteToTrip;
+    
+
+    if (!autocomplete) {
+      console.error(`Autocomplete instance not available for ${type}`);
+      return;
+    }
+
+    const place = autocomplete.getPlace();
+    console.log(`Place changed for ${type}`, place);
+
+    if (place && place.geometry) {
+      getPlaceDetails(place, `${type}-${formType}`);
+    } else {
+      console.error('Place details not available for ', place);
+    }
+  };
   return (
     <div className="main-content">
       <div className="dashboard">
@@ -125,28 +209,28 @@ const TripMonitor = () => {
               <tr>
                 <td>
                   <div>
-                    <h4>Kilometers travelled</h4>
-                    <p>17km</p>
+                    <h4>Days booked</h4>
+                    <p>3</p>
                   </div>
                 </td>
                 <td>
                   <div>
                     <h4>Time on board</h4>
-                    <p>20'</p>
+                    <p>1h20'</p>
                   </div>
                 </td>
               </tr>
               <tr>
                 <td>
                   <div>
-                    <h4>Kilometers remaining</h4>
-                    <p>10km</p>
+                    <h4>Days remaining</h4>
+                    <p>4</p>
                   </div>
                 </td>
                 <td>
                   <div>
-                    <h4>Time upon arrival</h4>
-                    <p>13'</p>
+                    <h4>Kilometers travelled</h4>
+                    <p>143km</p>
                   </div>
                 </td>
               </tr>
@@ -179,17 +263,30 @@ const TripMonitor = () => {
         </div>
 
         <div className="map">
-          <LoadScript googleMapsApiKey="AIzaSyCKYIUUKpUGlRbuu1BFgBBv05eSvyqiUsY" libraries={['places']}>
+          <LoadScript googleMapsApiKey="AIzaSyCKYIUUKpUGlRbuu1BFgBBv05eSvyqiUsY" libraries={[ 'places']}>
             <GoogleMap
               mapContainerStyle={containerStyle}
               center={center}
               zoom={7}
             >
-             <DirectionsRenderer directions={directions} />
+            {directions && <DirectionsRenderer directions={directions} />}
             </GoogleMap>
           </LoadScript>
-          <p>Start Address: {directions?.routes[0]?.legs[0]?.start_address}</p>
-          <p>End Address: {directions?.routes[0]?.legs[0]?.end_address}</p>
+          <div className="input-group">
+            <img src="/IMG/Main/TripMonitor/icon-marker2.png" alt="Marker" className="input-icon" />
+            <Autocomplete
+                onLoad={(autocomplete) => handleAutocompleteLoad(autocomplete, 'from', 'trip')}
+                onPlaceChanged={() => handlePlaceChanged('from', 'trip')}
+              >
+                <input
+                  type="text"
+                  id="from-trip"
+                  name="from-trip"
+                  className="rounded-input"
+                  placeholder="Enter location"
+                />
+              </Autocomplete>
+            </div>
         </div>
       </div>
     </div>

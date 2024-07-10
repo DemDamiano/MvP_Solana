@@ -52,7 +52,7 @@ import { Connection, SendTransactionError } from "@solana/web3.js";
             },
             {
                 id: "9e31b5e3-aa48-47d4-bf25-fde05488085f",
-                type: "engine_temperature",
+                type: "balance",
                 data: [
                     90.34,
                     90.55,

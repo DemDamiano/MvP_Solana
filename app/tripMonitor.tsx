@@ -70,7 +70,7 @@ const TripMonitor = () => {
 
         setAvailableCars(iotData.sensors.find(sensor => sensor.type === 'availableCars')?.data[0] || 0);
         setRentalCost(iotData.sensors.find(sensor => sensor.type === 'rentalCost')?.data[0] || 0);
-        setBalance(iotData.sensors.find(sensor => sensor.type === 'engine_temperature')?.data[0] || 0);
+        setBalance(iotData.sensors.find(sensor => sensor.type === 'balance')?.data[0] || 0);
         setFuelPercentage(iotData.sensors.find(sensor => sensor.type === 'fuel_pump')?.data[0] || 0);
         setFuelDistance(iotData.sensors.find(sensor => sensor.type === 'fuelDistance')?.data[0] || 0);
       }

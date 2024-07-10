@@ -1,0 +1,163 @@
+/* CSS classes migrated from common.css */
+.main-content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: #F2F3F5;
+  overflow: hidden;
+}
+
+.icon {
+  width: 50px;
+  height: 50px;
+  margin-bottom: 20px;
+}
+
+.dashboard {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  gap: 20px;
+  overflow: auto;
+}
+
+.card {
+  background-color: #5E17EB;
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 230px;
+  text-align: justify;
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  align-items: left;
+}
+
+.card h3 {
+  margin: 0;
+  font-size: 1em;
+  font-weight: normal;
+}
+
+.card p {
+  margin: 10px 0 0;
+  font-size: 2em;
+}
+
+.info-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.trip-info {
+  width:96%;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  overflow: auto;
+}
+
+.container, .map {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  box-sizing: border-box;
+}
+
+.container {
+  max-width: 40%;
+}
+
+.map {
+  flex: 1;
+  max-width: 40%;
+  text-align: center;
+}
+
+.trip-stats {
+  width: 80%;
+}
+
+.trip-stats h4 {
+  font-size: 1em;
+  color: #6c6c6c;
+}
+
+.trip-stats p {
+  font-size: 1.5em;
+  color: #0066cc;
+}
+
+.drop-off {
+  text-align: justify;
+}
+
+.drop-off h4 {
+  margin-bottom: 5px;
+}
+
+.drop-off .icon-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: justify;
+  margin-bottom: 5px;
+}
+
+.drop-off img {
+  width: 80px;
+  height: 80px;
+  margin-right: 5px;
+}
+
+.drop-off p {
+  font-size: 70px;
+  margin: 0;
+}
+
+.rental-chart {
+  display: flex;
+  width: 100%;
+  height: 30px;
+  background-color: #e0e0e0;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.rental-chart .time-spent {
+  background-color: #d3d3d3;
+}
+
+.rental-chart .active-time {
+  background-color: #6c03fc;
+}
+
+.time-spent {
+  background-color: #6200EE;
+  height: 100%;
+}
+
+.active-time {
+  background-color: #3700B3;
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px; /* Space between input fields */
+}
+
+.input-group p,
+.input-group .label {
+  margin-right: 10px;
+  font-size: 16px;
+  color: #333;
+}
