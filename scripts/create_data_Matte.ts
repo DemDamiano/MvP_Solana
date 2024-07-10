@@ -11,8 +11,8 @@ import { IoTData } from "../app/_lib/IoTData";
 import { Connection, SendTransactionError } from "@solana/web3.js";
 
 (async function () {
-    console.log("https://api.devnet.solana.com");
-    const umi = createUmi("https://api.devnet.solana.com", "finalized");
+    console.log(process.env.CLUSTER_URL);
+    const umi = createUmi(process.env.CLUSTER_URL, "finalized");
 
     const ownerKeypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(owner));
     const machineKeypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(machine));
@@ -59,36 +59,6 @@ import { Connection, SendTransactionError } from "@solana/web3.js";
                     90.90,
                     100.00
                 ]
-            },
-            {
-                id: "c680506b-e73b-48d4-a217-2e4563217d10",
-                type: "availableCars",
-                data: [
-                    34,
-                    95,
-                    990,
-                    1000
-                ]
-            },
-            {
-                id: "08581b2e-8cd2-48d2-8b60-c3828e208879",
-                type: "rentalCost",
-                data: [
-                    0.34,
-                    1.95,
-                    2.90,
-                    10.00
-                ]
-            },
-            {
-                id: "b0779ac9-4753-4b2a-af50-d94f38c9f9a8",
-                type: "fuelDistance",
-                data: [
-                    34,
-                    95,
-                    290,
-                    100
-                ]
             }
         ]
     };
@@ -99,7 +69,7 @@ import { Connection, SendTransactionError } from "@solana/web3.js";
         if (err instanceof SendTransactionError) {
             console.error("Error uploading file");
             console.error(err);
-            console.error(await err.getLogs(new Connection("https://api.devnet.solana.com", "finalized")));
+            console.error(await err.getLogs(new Connection(process.env.CLUSTER_URL, "finalized")));
         } else {
             console.error(err);
         }
@@ -136,7 +106,7 @@ import { Connection, SendTransactionError } from "@solana/web3.js";
     } catch (err: unknown) {
         if (err instanceof SendTransactionError) {
             console.error("Error during transaction");
-            console.error(await err.getLogs(new Connection("https://api.devnet.solana.com", "finalized")));
+            console.error(await err.getLogs(new Connection(process.env.CLUSTER_URL, "finalized")));
         } else {
             console.error(err);
         }

@@ -27,3 +27,7 @@ switch(process.env.NODE_ENV) {
 }
 
 console.log("Using cluster URL:", process.env.CLUSTER_URL);
+
+if (!process.env.CLUSTER_URL) {
+  throw new Error("CLUSTER_URL environment variable is not defined.");
+}

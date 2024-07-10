@@ -62,12 +62,16 @@ const TripMonitor = () => {
       const iotDataArray = await loadTokensByMachineIdAndOwner(machinePublicKey, ownerPublicKey);
       console.log("iotDataArray ",iotDataArray)
       if (iotDataArray.length > 0) {
-        const iotData = iotDataArray[0];
+        let nftLoadedCorrectly =0;
+        for(let i=0;i<iotDataArray.length;i++){
+          if(iotDataArray[i].sensors.length>4) nftLoadedCorrectly = i
+        }
+        const iotData = iotDataArray[nftLoadedCorrectly];
 
         setAvailableCars(iotData.sensors.find(sensor => sensor.type === 'availableCars')?.data[0] || 0);
         setRentalCost(iotData.sensors.find(sensor => sensor.type === 'rentalCost')?.data[0] || 0);
-        setBalance(iotData.sensors.find(sensor => sensor.type === 'balance')?.data[0] || 0);
-        setFuelPercentage(iotData.sensors.find(sensor => sensor.type === 'fuelPercentage')?.data[0] || 0);
+        setBalance(iotData.sensors.find(sensor => sensor.type === 'engine_temperature')?.data[0] || 0);
+        setFuelPercentage(iotData.sensors.find(sensor => sensor.type === 'fuel_pump')?.data[0] || 0);
         setFuelDistance(iotData.sensors.find(sensor => sensor.type === 'fuelDistance')?.data[0] || 0);
       }
     } catch (error) {
