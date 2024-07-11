@@ -5,8 +5,7 @@ import './tripManager.css';
 import machineKey from '../scripts/machine.json'
 import ownerKey from '../scripts/owner.json'
 import { loadTokensByMachineIdAndOwner } from  "../app/_lib/lib"
-import { Connection, Keypair, LAMPORTS_PER_SOL } from "@solana/web3.js";
-import { createSignerFromKeypair, signerIdentity, generateSigner, percentAmount, createGenericFile } from "@metaplex-foundation/umi";
+import { Keypair } from "@solana/web3.js";
 
 const containerStyle = {
   height: '250px',
@@ -52,8 +51,7 @@ const TripMonitor = () => {
       
       //console.log(" tripMonitor from:", fromPlace, " toPlace:", toPlace);
     }else{
-        calculateDirections(45.070312,7.686856499999999, 45.070312,7.686856499999999);
-      
+      calculateDirections(45.070312,7.686856499999999, 45.070312,7.686856499999999);
     }
   }, [storedData]);
   const LoadingPopup = () => (
