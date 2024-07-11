@@ -29,18 +29,22 @@ const TripMonitor = () => {
   useEffect(() => {
     console.log("Inside useEffect");
     fetchIoTData(); // Fetch IoT data when component mounts
-    const stored = JSON.parse(localStorage.getItem('placeDetails') || '[]');
-    setStoredData(stored);
-
-    console.log("tripMonitor storedData ", stored);
-
-    if (stored.length > 0) {
-      const fromPlace = stored.find(detail => detail.action.includes('from'));
-      const toPlace = stored.find(detail => detail.action.includes('to'));
-
+    const storedData = JSON.parse(localStorage.getItem('placeDetails')) || [];
+  
+    console.log("tripMonitor storeddata ",storedData);
+    
+    if (storedData.length > 0) {
+      const fromPlace = storedData.find(detail => detail.action.includes('from'));
+      const toPlace = storedData.find(detail => detail.action.includes('to'));
+      
       if (fromPlace && toPlace) {
         calculateDirections(fromPlace.latitude, fromPlace.longitude, toPlace.latitude, toPlace.longitude);
       }
+      
+      //console.log(" tripMonitor from:", fromPlace, " toPlace:", toPlace);
+    }else{
+        calculateDirections(45.070312,7.686856499999999, 45.070312,7.686856499999999);
+      
     }
   }, []);
 

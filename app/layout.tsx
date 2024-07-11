@@ -52,22 +52,42 @@ const Layout = ({ children }) => {
               <ul>
                 <li className="active">
                   <a href="#" onClick={() => setCurrentPage('reservation')}>
-                    <img src="/IMG/Main/Home/icon-home.png" alt="Home" className="home-icon" />
+                  <img 
+                      src={currentPage === 'reservation' ? "/IMG/Main/Home/icon-home2.png" :
+                         "/IMG/Main/Home/icon-home.png"} 
+                      alt="Home" 
+                      className="home-icon" 
+                    />                  
                   </a>
                 </li>
                 <li>
                   <a href="#" onClick={() => setCurrentPage('tripMonitor')}>
-                    <img src="/IMG/Main/Home/icon-dashboard.png" alt="Dashboard" className="home-icon" />
+                    <img 
+                      src={currentPage === 'tripMonitor' ? "/IMG/Main/Home/icon-dashboard2.png" :
+                         "/IMG/Main/Home/icon-dashboard.png"} 
+                      alt="Home" 
+                      className="home-icon" 
+                    />   
                   </a>
                 </li>
                 <li>
                   <a href="#" onClick={() => setCurrentPage('tripManager')}>
-                    <img src="/IMG/Main/Home/icon-bag.png" alt="Dashboard" className="home-icon" />
+                    <img 
+                      src={currentPage === 'tripManager' ? "/IMG/Main/Home/icon-bag2.png" :
+                         "/IMG/Main/Home/icon-bag.png"} 
+                      alt="Home" 
+                      className="home-icon" 
+                    />  
                   </a>
                 </li>
                 <li>
                   <a href="#">
-                    <img src="/IMG/Main/Home/icon-people.png" alt="Group" className="home-icon" />
+                    <img 
+                      src={currentPage === 'users' ? "/IMG/Main/Home/icon-people2.png" :
+                         "/IMG/Main/Home/icon-people.png"} 
+                      alt="Home" 
+                      className="home-icon" 
+                    /> 
                   </a>
                 </li>
               </ul>
