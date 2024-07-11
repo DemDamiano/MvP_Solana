@@ -52,9 +52,8 @@ const TripMonitor = () => {
       
       //console.log(" tripMonitor from:", fromPlace, " toPlace:", toPlace);
     }else{
-      if (fromPlace && toPlace) {
         calculateDirections(45.070312,7.686856499999999, 45.070312,7.686856499999999);
-      }
+      
     }
   }, [storedData]);
   const LoadingPopup = () => (
