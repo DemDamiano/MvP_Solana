@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { GoogleMap, LoadScript, DirectionsRenderer } from '@react-google-maps/api';
+import React, { useEffect, useState, useContext } from 'react';
+import { GoogleMap, LoadScript, DirectionsRenderer,DirectionsService } from '@react-google-maps/api';
 import './tripMonitor.css';
 import machineKey from '../scripts/machine.json'
 import ownerKey from '../scripts/owner.json'
 import { loadTokensByMachineIdAndOwner } from  "../app/_lib/lib"
-import { Keypair } from "@solana/web3.js";
+import { Connection, Keypair, LAMPORTS_PER_SOL } from "@solana/web3.js";
+import { createSignerFromKeypair, signerIdentity, generateSigner, percentAmount, createGenericFile } from "@metaplex-foundation/umi";
 
 const containerStyle = {
   height: '250px',
@@ -17,7 +18,6 @@ let center = {
 };
 
 const TripMonitor = () => {
-  const [isLoading, setIsLoading] = useState(false);
   const [availableCars, setAvailableCars] = useState(0);
   const [rentalCost, setRentalCost] = useState(0);
   const [balance, setBalance] = useState(0);
@@ -29,65 +29,66 @@ const TripMonitor = () => {
   useEffect(() => {
     console.log("Inside useEffect");
     fetchIoTData(); // Fetch IoT data when component mounts
-    const stored = JSON.parse(localStorage.getItem('placeDetails') || '[]');
-    setStoredData(stored);
-
-    console.log("tripMonitor storedData ", stored);
-
-    if (stored.length > 0) {
-      const fromPlace = stored.find(detail => detail.action.includes('from'));
-      const toPlace = stored.find(detail => detail.action.includes('to'));
-
+    const storedData = JSON.parse(localStorage.getItem('placeDetails'));
+  
+    console.log("tripMonitor storeddata ",storedData);
+    
+    if (storedData.length > 0) {
+      const fromPlace = storedData.find(detail => detail.action.includes('from'));
+      const toPlace = storedData.find(detail => detail.action.includes('to'));
+      
       if (fromPlace && toPlace) {
         calculateDirections(fromPlace.latitude, fromPlace.longitude, toPlace.latitude, toPlace.longitude);
       }
+      
+      //console.log(" tripMonitor from:", fromPlace, " toPlace:", toPlace);
     }
-  }, []);
+  }, [storedData]);
 
-  const LoadingPopup = () => (
-    <div className="loading-popup">
-      <p>On loading, please wait...</p>
-    </div>
-  );
-
-  const fetchIoTData = async () => {
-    let machinePublicKey = Keypair.fromSecretKey(new Uint8Array(machineKey)).publicKey;
-    let ownerPublicKey = Keypair.fromSecretKey(new Uint8Array(ownerKey)).publicKey;
-
-    console.log('fetchIoTData ', machinePublicKey, ' ', ownerPublicKey);
-
-    setIsLoading(true); // Mostra il popup di attesa
+  const fetchIoTData =async () => {
+    // Fetch the machine and owner public keys
+    
+    //let machineKeyString = machineKey.toString()
+    //let ownerKeyString = ownerKey.toString()
+    
+    let machinePublicKey = Keypair.fromSecretKey(new Uint8Array(machineKey)).publicKey; // Replace with actual machine public key
+    let ownerPublicKey = Keypair.fromSecretKey(new Uint8Array(ownerKey)).publicKey;// Replace with actual owner public key
+    
+    //machinePublicKey = machinePublicKey.publicKey
+   // ownerPublicKey = ownerPublicKey.publicKey
+    
+    console.log('fetchIoTData ',machinePublicKey, ' ', ownerPublicKey)
     try {
       const iotDataArray = await loadTokensByMachineIdAndOwner(machinePublicKey, ownerPublicKey);
-      console.log("iotDataArray ", iotDataArray);
+      console.log("iotDataArray ",iotDataArray)
       if (iotDataArray.length > 0) {
-        for (let i = 0; i < iotDataArray.length; i++) {
-          const iotData = iotDataArray[i];
-
-          setAvailableCars(iotData.sensors.find(sensor => sensor.type === 'availableCars').data[0]);
-          setRentalCost(iotData.sensors.find(sensor => sensor.type === 'rentalCost').data[0]);
-          setBalance(iotData.sensors.find(sensor => sensor.type === 'balance').data[0]);
-          setFuelPercentage(iotData.sensors.find(sensor => sensor.type === 'fuel_pump').data[0]);
-          setFuelDistance(iotData.sensors.find(sensor => sensor.type === 'fuelDistance').data[0]);
+        let nftLoadedCorrectly =0;
+        for(let i=0;i<iotDataArray.length;i++){
+          if(iotDataArray[i].sensors.length>4) nftLoadedCorrectly = i
         }
+        const iotData = iotDataArray[nftLoadedCorrectly];
+
+        setAvailableCars(iotData.sensors.find(sensor => sensor.type === 'availableCars')?.data[0] || 0);
+        setRentalCost(iotData.sensors.find(sensor => sensor.type === 'rentalCost')?.data[0] || 0);
+        setBalance(iotData.sensors.find(sensor => sensor.type === 'balance')?.data[0] || 0);
+        setFuelPercentage(iotData.sensors.find(sensor => sensor.type === 'fuel_pump')?.data[0] || 0);
+        setFuelDistance(iotData.sensors.find(sensor => sensor.type === 'fuelDistance')?.data[0] || 0);
       }
     } catch (error) {
       console.error('Error fetching IoT data:', error);
-    } finally {
-      setIsLoading(false); // Nasconde il popup di attesa
     }
   };
 
   const calculateDirections = (startLat, startLng, endLat, endLng) => {
     const directionsService = new window.google.maps.DirectionsService();
-    center = {
+    center={
       lat: startLat,
       lng: startLng
-    };
+    }
     const origin = { lat: startLat, lng: startLng };
     const destination = { lat: endLat, lng: endLng };
 
-    console.log("origin ", origin, " destination ", destination);
+    console.log("origin ",origin, " destination ",destination)
 
     directionsService.route(
       {
@@ -96,20 +97,22 @@ const TripMonitor = () => {
         travelMode: window.google.maps.TravelMode.DRIVING
       },
       (result, status) => {
-        console.log("end operation result ", result, " status ", status);
+        console.log("end operation result ",result," status ",status)
+        setDirections(result);
         switch (status) {
           case window.google.maps.DirectionsStatus.OK:
-            setDirections(result);
-            break;
+              setDirections(result);
+              break;
           case window.google.maps.DirectionsStatus.ZERO_RESULTS:
-            console.error('Nessun risultato trovato per la richiesta di direzioni.');
-            break;
+              console.error('Nessun risultato trovato per la richiesta di direzioni.');
+              break;
           case window.google.maps.DirectionsStatus.NOT_FOUND:
-            console.error('Uno o entrambi i punti di partenza/arrivo non sono validi.');
-            break;
+              console.error('Uno o entrambi i punti di partenza/arrivo non sono validi.');
+              break;
+          // Aggiungi gestione per altri stati di errore se necessario
           default:
-            console.error(`Errore nel recupero delle direzioni. Status: ${status}`);
-        }
+              console.error(`Errore nel recupero delle direzioni. Status: ${status}`);
+      }
       }
     );
   };
@@ -117,7 +120,6 @@ const TripMonitor = () => {
   return (
     <div className="main-content">
       <div className="dashboard">
-        {isLoading && <LoadingPopup />}
         <div className="card">
           <img src="/IMG/Main/TripMonitor/icon-marker.png" alt="Marker" className="icon" />
           <h3>Available Cars Nearby</h3>
@@ -205,13 +207,13 @@ const TripMonitor = () => {
         </div>
 
         <div className="map">
-          <LoadScript googleMapsApiKey="AIzaSyCKYIUUKpUGlRbuu1BFgBBv05eSvyqiUsY" libraries={['places']}>
+          <LoadScript googleMapsApiKey="AIzaSyCKYIUUKpUGlRbuu1BFgBBv05eSvyqiUsY" libraries={[ 'places']}>
             <GoogleMap
               mapContainerStyle={containerStyle}
               center={center}
               zoom={7}
             >
-              {directions && <DirectionsRenderer directions={directions} />}
+            {directions && <DirectionsRenderer directions={directions} />}
             </GoogleMap>
           </LoadScript>
           <p>Start Address: {directions?.routes[0]?.legs[0]?.start_address}</p>

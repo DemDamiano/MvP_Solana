@@ -19,6 +19,7 @@ let center = {
 };
 
 const TripMonitor = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const [availableCars, setAvailableCars] = useState(0);
   const [rentalCost, setRentalCost] = useState(0);
   const [balance, setBalance] = useState(0);
@@ -52,6 +53,11 @@ const TripMonitor = () => {
       //console.log(" tripMonitor from:", fromPlace, " toPlace:", toPlace);
     }
   }, [storedData]);
+  const LoadingPopup = () => (
+    <div className="loading-popup">
+      <p>On loading, please wait...</p>
+    </div>
+  );
 
   const fetchIoTData =async () => {
     // Fetch the machine and owner public keys
@@ -66,24 +72,25 @@ const TripMonitor = () => {
    // ownerPublicKey = ownerPublicKey.publicKey
     
     console.log('fetchIoTData ',machinePublicKey, ' ', ownerPublicKey)
+    setIsLoading(true); // Mostra il popup di attesa
     try {
       const iotDataArray = await loadTokensByMachineIdAndOwner(machinePublicKey, ownerPublicKey);
-      console.log("iotDataArray ",iotDataArray)
+      console.log("iotDataArray ", iotDataArray);
       if (iotDataArray.length > 0) {
-        let nftLoadedCorrectly =0;
-        for(let i=0;i<iotDataArray.length;i++){
-          if(iotDataArray[i].sensors.length>4) nftLoadedCorrectly = i
-        }
-        const iotData = iotDataArray[nftLoadedCorrectly];
+        for (let i = 0; i < iotDataArray.length; i++) {
+          const iotData = iotDataArray[i];
 
-        setAvailableCars(iotData.sensors.find(sensor => sensor.type === 'availableCars')?.data[0] || 0);
-        setRentalCost(iotData.sensors.find(sensor => sensor.type === 'rentalCost')?.data[0] || 0);
-        setBalance(iotData.sensors.find(sensor => sensor.type === 'balance')?.data[0] || 0);
-        setFuelPercentage(iotData.sensors.find(sensor => sensor.type === 'fuel_pump')?.data[0] || 0);
-        setFuelDistance(iotData.sensors.find(sensor => sensor.type === 'fuelDistance')?.data[0] || 0);
+          setAvailableCars(iotData.sensors.find(sensor => sensor.type === 'availableCars').data[0]);
+          setRentalCost(iotData.sensors.find(sensor => sensor.type === 'rentalCost').data[0]);
+          setBalance(iotData.sensors.find(sensor => sensor.type === 'balance').data[0]);
+          setFuelPercentage(iotData.sensors.find(sensor => sensor.type === 'fuel_pump').data[0]);
+          setFuelDistance(iotData.sensors.find(sensor => sensor.type === 'fuelDistance').data[0]);
+        }
       }
     } catch (error) {
       console.error('Error fetching IoT data:', error);
+    } finally {
+      setIsLoading(false); // Nasconde il popup di attesa
     }
   };
 
@@ -176,6 +183,7 @@ const TripMonitor = () => {
   return (
     <div className="main-content">
       <div className="dashboard">
+      {isLoading && <LoadingPopup />}
         <div className="card">
           <img src="/IMG/Main/TripMonitor/icon-marker.png" alt="Marker" className="icon" />
           <h3>Available Cars Nearby</h3>

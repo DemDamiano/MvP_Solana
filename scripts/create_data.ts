@@ -54,7 +54,7 @@ import { Connection, SendTransactionError } from "@solana/web3.js";
                 id: "9e31b5e3-aa48-47d4-bf25-fde05488085f",
                 type: "balance",
                 data: [
-                    90.34,
+                    90.50,
                     90.55,
                     90.90,
                     100.00
@@ -64,7 +64,7 @@ import { Connection, SendTransactionError } from "@solana/web3.js";
                 id: "c680506b-e73b-48d4-a217-2e4563217d10",
                 type: "availableCars",
                 data: [
-                    34,
+                    27,
                     95,
                     990,
                     1000
@@ -74,7 +74,7 @@ import { Connection, SendTransactionError } from "@solana/web3.js";
                 id: "08581b2e-8cd2-48d2-8b60-c3828e208879",
                 type: "rentalCost",
                 data: [
-                    0.34,
+                    0.45,
                     1.95,
                     2.90,
                     10.00
