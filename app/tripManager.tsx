@@ -38,7 +38,7 @@ const TripMonitor = () => {
   useEffect(() => {
     console.log("Inside useEffect");
     fetchIoTData(); // Fetch IoT data when component mounts
-    const storedData = JSON.parse(localStorage.getItem('placeDetails'));
+    const storedData = JSON.parse(localStorage.getItem('placeDetails')) || [];
   
     console.log("tripMonitor storeddata ",storedData);
     
@@ -51,6 +51,10 @@ const TripMonitor = () => {
       }
       
       //console.log(" tripMonitor from:", fromPlace, " toPlace:", toPlace);
+    }else{
+      if (fromPlace && toPlace) {
+        calculateDirections(45.070312,7.686856499999999, 45.070312,7.686856499999999);
+      }
     }
   }, [storedData]);
   const LoadingPopup = () => (
