@@ -17,6 +17,9 @@ const Page = () => {
   const handleCarReservation = () => {
     setCurrentPage('tripMonitor'); // Navigate to TripMonitor
   };
+  const logout = () => {
+    window.location.reload(); // Reload the page on logout
+  };
 
   const renderPageContent = () => {
     if (!isLoggedIn) {
@@ -81,7 +84,7 @@ const Page = () => {
                 </li>
               </ul>
             </nav>
-            <div className="logout-section">
+            <div className="logout-section" onClick={logout}>
               <a href="#">
                 <img src="/IMG/Main/Home/icon-shutoff.png" alt="Logout" className="home-icon" />
               </a>

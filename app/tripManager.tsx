@@ -176,7 +176,7 @@ const TripMonitor = () => {
     console.log(`Place changed for ${type}`, place);
 
     if (place && place.geometry) {
-      getPlaceDetails(place, `${type}-${formType}`);
+      getPlaceDetails(place, `${type}`);
     } else {
       console.error('Place details not available for ', place);
     }
