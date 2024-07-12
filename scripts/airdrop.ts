@@ -1,14 +1,12 @@
-const { Connection, Keypair, LAMPORTS_PER_SOL } = require('@solana/web3.js');
-const fs = require('fs');
+import "../config";
+import { Connection, Keypair, LAMPORTS_PER_SOL } from "@solana/web3.js";
 
-const privateKey = JSON.parse(fs.readFileSync('./machine.json', 'utf8'));
+import privateKey from "./machine.json";
 
 (async function () {
     const keypair = Keypair.fromSecretKey(new Uint8Array(privateKey));
     console.log("Airdrop to", keypair.publicKey.toBase58());
-
-    const connection = new Connection("https://api.devnet.solana.com", "finalized");
-
+    const connection = new Connection(process.env.CLUSTER_URL, "finalized");
     console.log("Current balance:", await connection.getBalance(keypair.publicKey));
     const airdropSignature = await connection.requestAirdrop(
         keypair.publicKey,
