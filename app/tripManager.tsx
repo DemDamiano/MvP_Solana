@@ -272,7 +272,7 @@ const TripMonitor = () => {
         </div>
 
         <div className="map">
-          <LoadScript googleMapsApiKey="AIzaSyCKYIUUKpUGlRbuu1BFgBBv05eSvyqiUsY" libraries={[ 'places']}>
+          <LoadScript googleMapsApiKey="" libraries={[ 'places']}>
             <GoogleMap
               mapContainerStyle={containerStyle}
               center={center}
@@ -289,7 +289,7 @@ const TripMonitor = () => {
               >
                 <input
                   type="text"
-                  id="from-trip"
+                  id="from"
                   name="from-trip"
                   className="rounded-input"
                   placeholder="Enter location"

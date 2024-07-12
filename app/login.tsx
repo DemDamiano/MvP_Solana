@@ -1,16 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-
 import './login.css';
 
 const LoginPage = ({ onLogin }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [remember, setRemember] = useState(false);
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  const carouselItems = [
+    "/IMG/Login/Carousel/1.png",
+    "/IMG/Login/Carousel/3.png",
+    "/IMG/Login/Carousel/5.png",
+    "/IMG/Login/Carousel/7.png"
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prevSlide) => (prevSlide + 1) % carouselItems.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [carouselItems.length]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Implementa la logica di login qui
     onLogin();
   };
 
@@ -71,23 +84,12 @@ const LoginPage = ({ onLogin }) => {
           </div>
         </form>
       </div>
-      <div className="carousel active">
-        <div className="carousel-item active">
-          <img src="/IMG/Login/Carousel/1.png" alt="Car 1" />
-       
-        </div>
-        <div className="carousel-item">
-          <img src="/IMG/Login/Carousel/3.png" alt="Car 2" />
-         
-        </div>
-        <div className="carousel-item">
-          <img src="/IMG/Login/Carousel/5.png" alt="Car 2" />
-         
-        </div>
-        <div className="carousel-item">
-          <img src="/IMG/Login/Carousel/7.png" alt="Car 2" />
-   
-        </div>
+      <div className="carousel">
+        {carouselItems.map((src, index) => (
+          <div key={index} className={`carousel-item ${index === currentSlide ? 'active' : ''}`}>
+            <img src={src} alt={`Car ${index + 1}`} />
+          </div>
+        ))}
       </div>
     </div>
   );

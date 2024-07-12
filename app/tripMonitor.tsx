@@ -209,7 +209,7 @@ const TripMonitor = () => {
         </div>
 
         <div className="map">
-          <LoadScript googleMapsApiKey="AIzaSyCKYIUUKpUGlRbuu1BFgBBv05eSvyqiUsY" libraries={['places']}>
+          <LoadScript googleMapsApiKey="" libraries={['places']}>
             <GoogleMap
               mapContainerStyle={containerStyle}
               center={center}

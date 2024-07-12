@@ -194,7 +194,7 @@ const CarReservation = ({ carReservation }) => {
 
   return (
     <LoadScript
-      googleMapsApiKey="AIzaSyCKYIUUKpUGlRbuu1BFgBBv05eSvyqiUsY"
+      googleMapsApiKey=""
       libraries={['places']}
     >
       {renderReservationForm()}
